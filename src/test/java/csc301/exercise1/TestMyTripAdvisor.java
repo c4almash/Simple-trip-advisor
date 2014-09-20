@@ -65,8 +65,8 @@ public class TestMyTripAdvisor {
 	@Test(timeout=3000)
 	public void twoRouteTripWhereRoutesAreFromDifferentCompanies() {
 		MyTripAdvisor advisor = new MyTripAdvisor();
-		advisor.addTrainCopmany(fastTrain);
-		advisor.addTrainCopmany(swiftRail);
+		advisor.addTrainCompany(fastTrain);
+		advisor.addTrainCompany(swiftRail);
 		
 		List<DirectRoute> trip = advisor.getCheapestTrip(Constants.TORONTO, Constants.MONTREAL);
 		
@@ -80,8 +80,8 @@ public class TestMyTripAdvisor {
 	@Test(timeout=3000)
 	public void priceOfTwoRouteTripWhereRoutesAreFromDifferentCompanies() {
 		MyTripAdvisor advisor = new MyTripAdvisor();
-		advisor.addTrainCopmany(fastTrain);
-		advisor.addTrainCopmany(swiftRail);
+		advisor.addTrainCompany(fastTrain);
+		advisor.addTrainCompany(swiftRail);
 		
 		// Make sure that we got the total price we expect
 		assertTrue(55 == advisor.getCheapestPrice(Constants.TORONTO, Constants.MONTREAL));
