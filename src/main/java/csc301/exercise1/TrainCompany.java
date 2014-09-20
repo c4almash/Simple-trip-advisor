@@ -4,34 +4,32 @@ import java.util.Collection;
 
 public class TrainCompany {
 
-	
+	private String name;
+
 	public TrainCompany(String name) {
+		this.name = name;
 	}
-	
-	
-	
+		
 	@Override
 	public String toString() {
 		return String.format("%s, offering %d routes between %d stations", 
 				getName(), getDirectRoutesCount(), getStationsCount());
 	}
 	
-	
-	
 	public String getName() {
-		return null;
+		return this.name;
 	}
 	
 	public void setName(String name) {
+		this.name = name;
 	}
-	
 	
 	
 	/**
 	 * @return The DirectRoute object that was created/updated.
 	 */
 	public DirectRoute createOrUpdateDirectRoute(String fromStation, String toStation, double price){
-		return null;
+		return new DirectRoute(this, fromStation, toStation, price);
 	}
 	
 	

@@ -11,7 +11,8 @@ public class MyTripAdvisor {
 	
 	
 	public void addTrainCopmany(TrainCompany trainCompany){
-		
+		//Typo in function name
+		//Same typo in TestMyTripAdvisor file
 	}
 	
 	/**
