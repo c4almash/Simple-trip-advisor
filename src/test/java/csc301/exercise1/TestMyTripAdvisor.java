@@ -87,4 +87,11 @@ public class TestMyTripAdvisor {
 		assertTrue(55 == advisor.getCheapestPrice(Constants.TORONTO, Constants.MONTREAL));
 	}
 
+
+	// Adding a null company is not allowed
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldNotAddNullCompany() {
+		MyTripAdvisor advisor = new MyTripAdvisor();
+		advisor.addTrainCompany(null);
+	}
 }

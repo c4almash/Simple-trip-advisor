@@ -33,4 +33,10 @@
 		</dependency>
 	</dependencies>
 
+	<url>https://github.com/csc301-fall2014/Ex1-evening-Team1-Ex1-</url>
+	<description>Simple trip advisor written in Java</description>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/csc301-fall2014/Ex1-evening-Team1-Ex1-/issues</url>
+	</issueManagement>
 </project>
