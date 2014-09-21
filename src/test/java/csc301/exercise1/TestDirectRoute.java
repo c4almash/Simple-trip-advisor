@@ -75,7 +75,7 @@ public class TestDirectRoute {
 	}
 
 	// Not sure if creating duplicate route should throw error or gracefully fall back and
-	// return the existing route.. (currently breaking tests for MyTripAdvisor)
+	// return the existing route..
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldNotAllowStationWithSameNames() {
 		new DirectRoute(cnr, Constants.TORONTO, Constants.MONTREAL, 37.5);
