@@ -13,8 +13,6 @@ public class MyTripAdvisor {
 	
 	
 	public void addTrainCompany(TrainCompany trainCompany){
-		//Typo in function name, originally called addTrainCopmany
-		//Same typo in TestMyTripAdvisor file
 		if (trainCompany == null) {
 			throw new IllegalArgumentException("Adding a null company is not allowed");
 		}
