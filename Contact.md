@@ -8,3 +8,5 @@ Please fill in your contact info in this file, so that your teammates can get in
 | g3sunny       | Sunny Li      | sun.li@mail.utoronto.ca     | `N/A `            |
 | c2laitim      | Timothy Lai   | tim.lai@mail.utoronto.ca    | 416-919-1800      |
 | g3abby        | Abby Zhu      | abby.zhu@mail.utoronto.ca   | 647-862-2842      |
+| g3wu          | Lawrence Wu   | rawrence.wu@mail.utoronto.ca| 416-669-8707      |
+
