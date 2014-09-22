@@ -12,6 +12,42 @@ public class TestDirectRoute {
 	@Test
 	public void testCreateInstanceWithoutException(){
 		new DirectRoute(new TrainCompany("Via"), Constants.TORONTO, Constants.OTTAWA, 37.5);
+		
 	}
 	
+	public void testTrainCompanyNull(){
+		new DirectRoute(new TrainCompany(null), Constants.TORONTO, Constants.OTTAWA, 37.5);
+		
+	}
+	
+	public void testTrainCompanyTrailingSpace(){
+		
+	}
+	
+	public void testFromStationNull(){
+		
+	}
+	
+	public void testFromStationSpace(){
+		
+	}	
+	
+	public void testToStationNull(){
+		
+	}
+	
+	public void testToStationSpace(){
+		
+	}	
+	
+	public void testPriceNull(){
+		
+	}
+	
+	public void testPriceEmpty(){
+	
+	}
+
+	
+
 }
