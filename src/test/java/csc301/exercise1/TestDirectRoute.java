@@ -10,7 +10,6 @@ import csc301.exercise1.util.Constants;
 public class TestDirectRoute {
 
 	private static TrainCompany viaRail, cnr, cpr;
-	//private static TrainCompany  empty, blank, spaces;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -18,9 +17,6 @@ public class TestDirectRoute {
 		cnr = new TrainCompany("Canadian National Railway");
 		cpr = new TrainCompany("Canadian Pacific Railway");
 		
-		//empty = new TrainCompany("");
-		//blank = new TrainCompany(" ");
-		//spaces = new TrainCompany(" SpacesBeforeAndAfter ");
 	}
 
 	// A very basic example of a passing test
@@ -42,21 +38,6 @@ public class TestDirectRoute {
 	public void testTrainCompanyNull() {
 		new DirectRoute(null, Constants.TORONTO, Constants.MONTREAL, 37.5);
 	}
-	/* These should probably be in the other test file oops
-	@Test(expected = IllegalArgumentException.class)
-	public void testTrainCompanyEmpty() {
-		new DirectRoute(empty, Constants.TORONTO, Constants.MONTREAL, 37.5);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testTrainCompanyBlank() {
-		new DirectRoute(blank, Constants.TORONTO, Constants.MONTREAL, 37.5);
-	}
-	
-	public void testTrainCompanyTrailingSpaces() {
-		new DirectRoute(spaces, Constants.TORONTO, Constants.MONTREAL, 37.5);
-	}
-	*/
 	
 	/*
 	 * Test fromStation and toStation attribute of DirectRoute
@@ -77,6 +58,15 @@ public class TestDirectRoute {
 		new DirectRoute(cnr, "A", "B ", 37.5);
 		new DirectRoute(cnr, " C", " D ", 37.5);
 	}
+
+	/* Not sure if we actually need to test these cases but it would
+	 * make our code function with mismatched inputs
+	
+	@Test(expected = IllegalArgumentException.class) 
+	public void testFromToMismatch(){
+		new DirectRoute(viaRail, 0, 1.23, 37.5);
+	}
+	*/
 	
 	/*
 	 * Test price attribute of DirectRoute
@@ -87,11 +77,13 @@ public class TestDirectRoute {
 	}		
 	/* Not sure if we actually need to test these cases but it would
 	 * make our code function with mismatched inputs
-	 
+	
+	@Test(expected = IllegalArgumentException.class) 
 	public void testPriceNull(){
 		new DirectRoute(viaRail, Constants.TORONTO, Constants.MONTREAL, null);
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
 	public void testPriceMismatch(){
 		new DirectRoute(viaRail, Constants.TORONTO, Constants.MONTREAL, "String");
 	}
