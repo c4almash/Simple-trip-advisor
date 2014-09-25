@@ -33,11 +33,11 @@ public class DirectRoute {
 	
 	public void setFromStation(String fromStation) {
 		if (fromStation == null) {
-			throw new IllegalArgumentException("name must not be null");
+			throw new IllegalArgumentException("Name must not be null");
 		}
 		fromStation = fromStation.trim();
 		if (fromStation.isEmpty()) {
-			throw new IllegalArgumentException("names must contain at least one non-whitespace character");
+			throw new IllegalArgumentException("Names must contain at least one non-whitespace character");
 		}
 		this.fromStation = fromStation;
 	}
@@ -49,11 +49,11 @@ public class DirectRoute {
 	
 	public void setToStation(String toStation) {
 		if (toStation == null) {
-			throw new IllegalArgumentException("name must not be null");
+			throw new IllegalArgumentException("Name must not be null");
 		}
 		toStation = toStation.trim();
 		if (toStation.isEmpty()) {
-			throw new IllegalArgumentException("names must contain at least one non-whitespace character");
+			throw new IllegalArgumentException("Names must contain at least one non-whitespace character");
 		}
 		this.toStation = toStation;
 	}
@@ -65,7 +65,7 @@ public class DirectRoute {
 	
 	public void setPrice(double price) {
 		if (price < 0) {
-			throw new IllegalArgumentException("price must be non-negative");
+			throw new IllegalArgumentException("Price must be non-negative");
 		}
 		this.price = price;
 	}
@@ -73,10 +73,6 @@ public class DirectRoute {
 	
 	@Override
 	public boolean equals(Object obj) {
-		//Why is the argument Object type and not DirectRoute type?
-		//Doesn't this function just compare if two DirectRoute objects are equal?
-		//Forces casting.
-		
 		return getTrainCompany().getName() == ((DirectRoute) obj).getTrainCompany().getName() &&
 				getFromStation() == ((DirectRoute) obj).getFromStation() &&
 				getToStation() == ((DirectRoute) obj).getToStation() &&
