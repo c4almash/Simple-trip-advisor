@@ -73,14 +73,11 @@ public class DirectRoute {
 	
 	@Override
 	public boolean equals(Object obj) {
-		//Why is the argument Object type and not DirectRoute type?
-		//Doesn't this function just compare if two DirectRoute objects are equal?
-		//Forces casting.
-		
-		return getTrainCompany().getName() == ((DirectRoute) obj).getTrainCompany().getName() &&
-				getFromStation() == ((DirectRoute) obj).getFromStation() &&
-				getToStation() == ((DirectRoute) obj).getToStation() &&
-				getPrice() == ((DirectRoute) obj).getPrice();
+		DirectRoute comp = (DirectRoute) obj;
+		return getTrainCompany().equals(comp.getTrainCompany()) &&
+			getFromStation().equals(comp.getFromStation()) &&
+			getToStation().equals(comp.getToStation()) &&
+			getPrice() == comp.getPrice();
 	}
 	
 	
