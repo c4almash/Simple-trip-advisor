@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import csc301.exercise1.util.Constants;
@@ -38,15 +38,15 @@ public class TestMyTripAdvisor {
 	 */
 	
 	
-	private TrainCompany fastTrain;
-	private TrainCompany swiftRail;
+	private static TrainCompany fastTrain;
+	private static TrainCompany swiftRail;
 
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 		// Create TrainCompany instances from data files in the resources folder.
-		fastTrain = Utils.createCopmanyFromDataFile("FastTrain.txt");
-		swiftRail = Utils.createCopmanyFromDataFile("SwiftRail.txt");
+		fastTrain = Utils.createCompanyFromDataFile("FastTrain.txt");
+		swiftRail = Utils.createCompanyFromDataFile("SwiftRail.txt");
 	}
 
 	
@@ -87,4 +87,11 @@ public class TestMyTripAdvisor {
 		assertTrue(55 == advisor.getCheapestPrice(Constants.TORONTO, Constants.MONTREAL));
 	}
 
+
+	// Adding a null company is not allowed
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldNotAddNullCompany() {
+		MyTripAdvisor advisor = new MyTripAdvisor();
+		advisor.addTrainCompany(null);
+	}
 }

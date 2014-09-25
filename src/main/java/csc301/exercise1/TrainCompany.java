@@ -53,18 +53,14 @@ public class TrainCompany {
 		for (int i = 0; i < directRouteCollection.size(); i++) {
 			//Checks each DirectRoute object in the ArrayList to see if
 			//any of them goes from "fromStation" to "toStation" and remove them.
-			//This literally just checks each object in the collection, I don't know if
-			//you guys want to make a better searching algorithm or something.
 			if (((DirectRoute) directRouteCollection.toArray()[i]).getFromStation().equals(fromStation.trim()) &&
 					((DirectRoute) directRouteCollection.toArray()[i]).getToStation().equals(toStation.trim())) {
 				directRouteCollection.remove(directRouteCollection.toArray()[i]);
 			}
 		}
 	}
-	
-	//Why is there no addDirectRoute method in the original file
-	//I had to add this
-	public void addDirectRoute(String fromStation, String toStation, double price) {
+
+	public void addRoute(String fromStation, String toStation, double price) {
 		directRouteCollection.add(createOrUpdateDirectRoute(fromStation, toStation, price));
 	}
 	
@@ -156,15 +152,15 @@ public class TrainCompany {
 	//Error checking helper function
 	public static void checkError(String... name) {
 		if (name == null) {
-			throw new IllegalArgumentException("names must not be null");
+			throw new IllegalArgumentException("Names must not be null");
 		}
 		for(int i = 0; i < name.length; i++) {
 			if (name[i] == null) {
-				throw new IllegalArgumentException("names must not be null");
+				throw new IllegalArgumentException("Names must not be null");
 			}
 			name[i] = name[i].trim();
 			if (name[i].isEmpty()) {
-				throw new IllegalArgumentException("names must contain at least one non-whitespace character");
+				throw new IllegalArgumentException("Names must contain at least one non-whitespace character");
 			}
 		}
 	}
