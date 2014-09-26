@@ -3,6 +3,16 @@ package csc301.exercise1;
 import java.util.ArrayList;
 import java.util.Collection;
 
+class DirectRouteNotFound extends Exception
+{
+      public DirectRouteNotFound() {}
+
+      public DirectRouteNotFound(String message)
+      {
+         super(message);
+      }
+ }
+
 public class TrainCompany {
 	
 	//Global static list to keep track of all the names used by train companies so far
@@ -42,9 +52,9 @@ public class TrainCompany {
 	 */
 	public DirectRoute createOrUpdateDirectRoute(String fromStation, String toStation, double price){
 		DirectRoute newRoute = new DirectRoute(this, fromStation, toStation, price);
-		if (this.routeExists(newRoute)) {
+		try {
 			this.updateRouteWithPrice(newRoute, price);
-		} else {
+		} catch (DirectRouteNotFound e) {
 			this.addRoute(newRoute);
 		}
 		return newRoute;
@@ -55,14 +65,18 @@ public class TrainCompany {
 	 * Delete the specified route, if it exists.
 	 */
 	public void deleteDirectRoute(String fromStation, String toStation){
-		this.deleteRoute(this.getRouteWithFromStationAndToStation(fromStation, toStation));
+		try {
+			this.deleteRoute(this.getRouteWithFromStationAndToStation(fromStation, toStation));
+		} catch (DirectRouteNotFound e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * @return null if there is no route from <code>fromStation</code> to
 	 * 			<code>toStation</code> with this TrainCompany.
 	 */
-	public DirectRoute getDirectRoute(String fromStation, String toStation){
+	public DirectRoute getDirectRoute(String fromStation, String toStation) throws DirectRouteNotFound{
 		checkError(fromStation, toStation);
 		return this.getRouteWithFromStationAndToStation(fromStation, toStation);
 	}
@@ -150,15 +164,11 @@ public class TrainCompany {
 		}
 	}
 
-	private boolean routeExists(DirectRoute route) {
-		return directRouteCollection.contains(route);
-	}
-
 	private void addRoute(DirectRoute route) {
 		directRouteCollection.add(route);
 	}
 
-	private void updateRouteWithPrice(DirectRoute route, double price) {
+	private void updateRouteWithPrice(DirectRoute route, double price) throws DirectRouteNotFound {
 		DirectRoute routeToBeUpdated = getRouteWithFromStationAndToStation(
 				route.getFromStation(), route.getToStation());
 		routeToBeUpdated.setPrice(price);
@@ -168,7 +178,7 @@ public class TrainCompany {
 		directRouteCollection.remove(route);
 	}
 
-	private DirectRoute getRouteWithFromStationAndToStation(String fromStation, String toStation) {
+	private DirectRoute getRouteWithFromStationAndToStation(String fromStation, String toStation) throws DirectRouteNotFound {
 		DirectRoute[] directRoutes = (DirectRoute[]) directRouteCollection.toArray();
 		DirectRoute returnValue = null;
 		for (int i = 0; i < directRoutes.length; i++) {
@@ -178,6 +188,10 @@ public class TrainCompany {
 				break;
 			}
 		}
-		return returnValue;
+		if (returnValue == null) {
+			throw new DirectRouteNotFound();
+		} else {
+			return returnValue;
+		}
 	}
 }
