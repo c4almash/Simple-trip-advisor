@@ -73,10 +73,11 @@ public class DirectRoute {
 	
 	@Override
 	public boolean equals(Object obj) {
-		return getTrainCompany().getName() == ((DirectRoute) obj).getTrainCompany().getName() &&
-				getFromStation() == ((DirectRoute) obj).getFromStation() &&
-				getToStation() == ((DirectRoute) obj).getToStation() &&
-				getPrice() == ((DirectRoute) obj).getPrice();
+		DirectRoute comp = (DirectRoute) obj;
+		return getTrainCompany().equals(comp.getTrainCompany()) &&
+			getFromStation().equals(comp.getFromStation()) &&
+			getToStation().equals(comp.getToStation()) &&
+			getPrice() == comp.getPrice();
 	}
 	
 	
