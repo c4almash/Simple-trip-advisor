@@ -108,4 +108,17 @@ public class TestDirectRoute {
 		new DirectRoute(cpr, Constants.TORONTO, Constants.MONTREAL, 36);
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldNotAllowSameValueForFromStationAndToStation() {
+		new DirectRoute(cpr, Constants.TORONTO, Constants.TORONTO, 50);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldNotAllowSameValueForFromStationAndToStationWithStringObjects() {
+		String toronto = new String("Toronto");
+		String toronto2 = new String("Toronto");
+
+		new DirectRoute(cpr, toronto, toronto2, 50);
+	}
+
 }
