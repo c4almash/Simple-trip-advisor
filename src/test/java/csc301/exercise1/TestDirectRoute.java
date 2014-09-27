@@ -1,6 +1,8 @@
 package csc301.exercise1;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -46,11 +48,24 @@ public class TestDirectRoute {
 	}
 	
 	@Test
-	public void testEqualMethod() {
-		// how do we assert equal if we couldn't even create a duplicate?
+	public void testDifferentRoutes() {
 		DirectRoute dr1 = new DirectRoute(viaRail, Constants.TORONTO, Constants.WATERLOO, 1);
 		DirectRoute dr2 = new DirectRoute(viaRail, Constants.TORONTO, Constants.LONDON, 1);
 		assertFalse(dr1.equals(dr2));
+	}
+
+	@Test
+	public void testEqualRoutes() {
+		String from = new String("Toronto");
+		String from2 = new String("Toronto");
+
+		String to = new String("Waterloo");
+		String to2 = new String("Waterloo");
+
+		DirectRoute dr1 = new DirectRoute(viaRail, from, to, 1);
+		DirectRoute dr2 = new DirectRoute(viaRail, from2, to2, 1);
+
+		assertTrue(dr1.equals(dr2));
 	}
 
 
@@ -91,6 +106,19 @@ public class TestDirectRoute {
 	public void shouldNotCreateExistingRouteWithDifferentPrices() {
 		new DirectRoute(cpr, Constants.TORONTO, Constants.MONTREAL, 37.5);
 		new DirectRoute(cpr, Constants.TORONTO, Constants.MONTREAL, 36);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldNotAllowSameValueForFromStationAndToStation() {
+		new DirectRoute(cpr, Constants.TORONTO, Constants.TORONTO, 50);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldNotAllowSameValueForFromStationAndToStationWithStringObjects() {
+		String toronto = new String("Toronto");
+		String toronto2 = new String("Toronto");
+
+		new DirectRoute(cpr, toronto, toronto2, 50);
 	}
 
 }
