@@ -49,7 +49,7 @@ public class DirectRoute {
 	}
 
 	/** 
-	 *	Return the train company that offers the direct route. 
+	 *	@return the train company that offers the direct route. 
 	 */
 	public TrainCompany getTrainCompany() {
 		return this.trainCompany;
@@ -69,7 +69,7 @@ public class DirectRoute {
 	}
 	
 	/**
-	 *	Return the departure station of the direct route.
+	 *	@return the departure station of the direct route.
 	 */
 	public String getFromStation() {
 		return this.fromStation;
@@ -94,7 +94,7 @@ public class DirectRoute {
 	}
 
 	/**
-	 *	Return the terminal station of the direct route.
+	 *	@return the terminal station of the direct route.
 	 */
 	public String getToStation() {
 		return this.toStation;
@@ -119,7 +119,7 @@ public class DirectRoute {
 	}
 
 	/**
-	 *  Return the price of the direct route.
+	 *  @return the price of the direct route.
 	 */
 	public double getPrice() {
 		return this.price;
@@ -139,12 +139,12 @@ public class DirectRoute {
 	}
 	
 	/**
-	 *	Return true/false based on the equality of two direct routes.
+	 *	@return true/false based on the equality of two direct routes.
 	 *
 	 *	@param	obj						Another direct route to be compared.
-	 *	@return	<tt>true</tt>			if and only if all four attributes of both routes are exactly the same.
-	 *	@throws	ClassCastException		if <code>obj</code> cannot be casted to
-	 *									a DirectRoute.
+	 *	@return	<tt>true</tt>			if and only if all four attributes of 
+	 *									both routes are exactly the same.
+	 *	@throws	ClassCastException		if <code>obj</code> cannot be casted t a DirectRoute.
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -155,7 +155,7 @@ public class DirectRoute {
 	}
 	
 	/**
-	 *	Return the details of the direct route as one single String, in the format of 
+	 *	@return the details of the direct route as one single String, in the format of 
 	 *	"[<code>trainCompany</code>] from [<code>fromStation</code>] to [<code>toStation</code>], [<code>price</code>]"
 	 */
 	@Override
