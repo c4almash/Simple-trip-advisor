@@ -80,30 +80,34 @@ public class TrainCompany {
 	
 	public Collection<DirectRoute> getDirectRoutesFrom(String fromStation){
 		checkError(fromStation);
-		//Initialize a temporary collection
-		Collection<DirectRoute> temp = new ArrayList<DirectRoute>();
-		DirectRoute directRoute;
-		//Check every DirectRoute for this TrainCompany and if any of them start from "fromStation" then
-		//add that DirectRoute object into our temp collection. Then return the temp collection after
-		//we checked every DirectRoute object
-		for (int i = 0; i < directRouteCollection.size(); i++) {
 
-			if (((DirectRoute) directRouteCollection.toArray()[i]).getFromStation().equals(fromStation.trim())) {
-				temp.add((DirectRoute) directRouteCollection.toArray()[i]);
+		DirectRoute[] directRoutes = (DirectRoute[]) directRouteCollection.toArray(new DirectRoute[directRouteCollection.size()]);
+		Collection<DirectRoute> routesFrom = new ArrayList<DirectRoute>();
+
+		DirectRoute directRoute;
+		for (int i = 0; i < directRoutes.length; i++) {
+			directRoute = directRoutes[i];
+			if (directRoute.getFromStation().equals(fromStation)) {
+				routesFrom.add(directRoute);
 			}
 		}
-		return temp;
+		return routesFrom;
 	}
 	
 	public Collection<DirectRoute> getRoutesTo(String toStation){
 		checkError(toStation);
-		Collection<DirectRoute> temp = new ArrayList<DirectRoute>();
-		for (int i = 0; i < directRouteCollection.size(); i++) {
-			if (((DirectRoute) directRouteCollection.toArray()[i]).getToStation().equals(toStation.trim())) {
-				temp.add((DirectRoute) directRouteCollection.toArray()[i]);
+
+		DirectRoute[] directRoutes = (DirectRoute[]) directRouteCollection.toArray(new DirectRoute[directRouteCollection.size()]);
+		Collection<DirectRoute> routesTo = new ArrayList<DirectRoute>();
+
+		DirectRoute directRoute;
+		for (int i = 0; i < directRoutes.length; i++) {
+			directRoute = directRoutes[i];
+			if (directRoute.getToStation().equals(toStation)) {
+				routesTo.add((DirectRoute) directRouteCollection.toArray()[i]);
 			}
 		}
-		return temp;
+		return routesTo;
 	}
 	
 	public Collection<DirectRoute> getAllDirectRoutes(){
@@ -123,31 +127,34 @@ public class TrainCompany {
 	 *   once, even if there are multiple routes from/to this station) 
 	 */
 	public int getStationsCount(){
-		//Initialize a list of String that'll hold the names of stations
+		// Initialize a list of String that'll hold the names of stations
 		Collection<String> uniqueStations = new ArrayList<String>();
 		
-		//Check each route
-		for (int i = 0; i < getAllDirectRoutes().size(); i++) {
+		DirectRoute[] directRoutes = (DirectRoute[]) directRouteCollection.toArray(new DirectRoute[directRouteCollection.size()]);
+		DirectRoute directRoute;
+
+		// Check each route
+		for (int i = 0; i < directRoutes.length; i++) {
+			directRoute = directRoutes[i];
 			
-			//If the "fromStation" isn't already in our list of stations, then add it.
-			//If the name is already in our list of stations, ignore and move to next part of code
-			if (!uniqueStations.contains(((DirectRoute) getAllDirectRoutes().toArray()[i]).getFromStation())) {
-				uniqueStations.add(((DirectRoute) getAllDirectRoutes().toArray()[i]).getFromStation());
+			// If the "fromStation" isn't already in our list of stations, then add it.
+			// If the name is already in our list of stations, ignore and move to next part of code
+			if (!uniqueStations.contains(directRoute.getFromStation())) {
+				uniqueStations.add(directRoute.getFromStation());
 			}
 			
-			//If the "toStation" isn't already in our list of stations, then add it.
-			//If the name is already in our list of stations, ignore and move to next part of code
-			if (!uniqueStations.contains(((DirectRoute) getAllDirectRoutes().toArray()[i]).getToStation())) {
-				uniqueStations.add(((DirectRoute) getAllDirectRoutes().toArray()[i]).getToStation());
+			// If the "toStation" isn't already in our list of stations, then add it.
+			// If the name is already in our list of stations, ignore and move to next part of code
+			if (!uniqueStations.contains(directRoute.getToStation())) {
+				uniqueStations.add(directRoute.getToStation());
 			}
 		}
 		
-		//We should get a list with exactly ONE copy of each unique station name, so just return the size of this list
+		// We should get a list with exactly ONE copy of each unique station name, so just return the size of this list
 		return uniqueStations.size();
 	}
 
-	// Error checking helper function
-	public static void checkError(String... name) {
+	private static void checkError(String... name) {
 		if (name == null) {
 			throw new IllegalArgumentException("Names must not be null");
 		}
@@ -155,8 +162,8 @@ public class TrainCompany {
 			if (name[i] == null) {
 				throw new IllegalArgumentException("Names must not be null");
 			}
-			name[i] = name[i].trim();
-			if (name[i].isEmpty()) {
+			String s = new String(name[i].trim());
+			if (s.isEmpty()) {
 				throw new IllegalArgumentException("Names must contain at least one non-whitespace character");
 			}
 		}
@@ -190,5 +197,6 @@ public class TrainCompany {
 		} else {
 			return returnValue;
 		}
+
 	}
 }
