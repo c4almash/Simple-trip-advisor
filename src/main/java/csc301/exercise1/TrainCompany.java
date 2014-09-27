@@ -47,7 +47,7 @@ public class TrainCompany {
 	public DirectRoute createOrUpdateDirectRoute(String fromStation, String toStation, double price){
 		DirectRoute newRoute = new DirectRoute(this, fromStation, toStation, price);
 		try {
-			this.updateRouteWithPrice(newRoute, price);
+			this.updateRoutePrice(newRoute, price);
 		} catch (DirectRouteNotFound e) {
 			this.addRoute(newRoute);
 		}
@@ -62,7 +62,6 @@ public class TrainCompany {
 		try {
 			this.deleteRoute(this.getRoute(fromStation, toStation));
 		} catch (DirectRouteNotFound e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -83,11 +82,12 @@ public class TrainCompany {
 		checkError(fromStation);
 		//Initialize a temporary collection
 		Collection<DirectRoute> temp = new ArrayList<DirectRoute>();
-		
+		DirectRoute directRoute;
 		//Check every DirectRoute for this TrainCompany and if any of them start from "fromStation" then
 		//add that DirectRoute object into our temp collection. Then return the temp collection after
 		//we checked every DirectRoute object
 		for (int i = 0; i < directRouteCollection.size(); i++) {
+
 			if (((DirectRoute) directRouteCollection.toArray()[i]).getFromStation().equals(fromStation.trim())) {
 				temp.add((DirectRoute) directRouteCollection.toArray()[i]);
 			}
@@ -166,7 +166,7 @@ public class TrainCompany {
 		directRouteCollection.add(route);
 	}
 
-	private void updateRouteWithPrice(DirectRoute route, double price) throws DirectRouteNotFound {
+	private void updateRoutePrice(DirectRoute route, double price) throws DirectRouteNotFound {
 		DirectRoute routeToBeUpdated = getRoute(route.getFromStation(), route.getToStation());
 		routeToBeUpdated.setPrice(price);
 	}
@@ -180,7 +180,7 @@ public class TrainCompany {
 		DirectRoute returnValue = null;
 		for (int i = 0; i < directRoutes.length; i++) {
 			DirectRoute cmp = directRoutes[i];
-			if (cmp.getFromStation() == fromStation && cmp.getToStation() == toStation) {
+			if (cmp.getFromStation().equals(fromStation) && cmp.getToStation().equals(toStation)) {
 				returnValue = cmp;
 				break;
 			}
