@@ -1,7 +1,10 @@
 package csc301.exercise1;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import csc301.exercise1.util.Utils;
 
 public class TrainCompany {
 	
@@ -9,6 +12,7 @@ public class TrainCompany {
 	//So that this doesn't happen:
 	//TrainCompany c1 = new TrainCompany("Via");
 	//TrainCompany c2 = new TrainCompany("Via");
+	
 	public static Collection<String> trainCompanyNameList= new ArrayList<String>();
 	private Collection<DirectRoute> directRouteCollection = new ArrayList<DirectRoute>();
 	private String name;
@@ -147,6 +151,15 @@ public class TrainCompany {
 		
 		//We should get a list with exactly ONE copy of each unique station name, so just return the size of this list
 		return uniqueStations.size();
+	}
+	
+	public static void main(String [] args) throws IOException {
+		TrainCompany EmptyCountTrain = null;
+		System.out.println("A");
+		EmptyCountTrain = Utils.createCompanyFromDataFile("EmptyCountTrain.txt");
+		System.out.println("B");
+		//TrainCompany a = new TrainCompany("EmptyCountTrain");
+		System.out.println(EmptyCountTrain.getDirectRoutesCount());
 	}
 	
 	//Error checking helper function

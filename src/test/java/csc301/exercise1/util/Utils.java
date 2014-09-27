@@ -19,15 +19,17 @@ public class Utils {
 	 * See existing files in src/test/resources for an example of the format. 
 	 */
 	public static TrainCompany createCompanyFromDataFile(String dataFileName) throws IOException{
+		
 		InputStream in = ClassLoader.getSystemResourceAsStream(dataFileName);
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));
-		
+
 		// The first line of the file should contain the company's name
 		String line = br.readLine();
 		TrainCompany company = new TrainCompany(line.trim());
 		
 		// The next lines are expected to be of the format fromStation,toStation,price
 		line = br.readLine();
+		
 		while(line != null){
 			line = line.trim();
 			// Skip blank lines
@@ -46,5 +48,12 @@ public class Utils {
 		return company;
 	}
 	
-	
+	public static void main(String [] args) throws IOException {
+		TrainCompany EmptyCountTrain = null;
+		//System.out.println("A");
+		EmptyCountTrain = Utils.createCompanyFromDataFile("EmptyCountTrain.txt");
+		//System.out.println("B");
+		//TrainCompany a = new TrainCompany("EmptyCountTrain");
+		System.out.println(EmptyCountTrain.getDirectRoutesCount());
+	}
 }
