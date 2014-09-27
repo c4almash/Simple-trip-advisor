@@ -14,12 +14,7 @@ class DirectRouteNotFound extends Exception
  }
 
 public class TrainCompany {
-	
-	//Global static list to keep track of all the names used by train companies so far
-	//So that this doesn't happen:
-	//TrainCompany c1 = new TrainCompany("Via");
-	//TrainCompany c2 = new TrainCompany("Via");
-	public static Collection<String> trainCompanyNameList= new ArrayList<String>();
+	public static Collection<String> trainCompanyNameList = new ArrayList<String>();
 	private Collection<DirectRoute> directRouteCollection = new ArrayList<DirectRoute>();
 	private String name;
 
@@ -46,7 +41,6 @@ public class TrainCompany {
 		trainCompanyNameList.add(this.name);
 	}
 	
-	
 	/**
 	 * @return The DirectRoute object that was created/updated.
 	 */
@@ -66,7 +60,7 @@ public class TrainCompany {
 	 */
 	public void deleteDirectRoute(String fromStation, String toStation){
 		try {
-			this.deleteRoute(this.getRouteWithFromStationAndToStation(fromStation, toStation));
+			this.deleteRoute(this.getRoute(fromStation, toStation));
 		} catch (DirectRouteNotFound e) {
 			e.printStackTrace();
 		}
@@ -76,9 +70,13 @@ public class TrainCompany {
 	 * @return null if there is no route from <code>fromStation</code> to
 	 * 			<code>toStation</code> with this TrainCompany.
 	 */
-	public DirectRoute getDirectRoute(String fromStation, String toStation) throws DirectRouteNotFound{
+	public DirectRoute getDirectRoute(String fromStation, String toStation){
 		checkError(fromStation, toStation);
-		return this.getRouteWithFromStationAndToStation(fromStation, toStation);
+		try {
+			return this.getRoute(fromStation, toStation);
+		} catch (DirectRouteNotFound e) {
+			return null;
+		}
 	}
 	
 	public Collection<DirectRoute> getDirectRoutesFrom(String fromStation){
@@ -148,18 +146,18 @@ public class TrainCompany {
 		return uniqueStations.size();
 	}
 
-	//Error checking helper function
+	// Error checking helper function
 	public static void checkError(String... name) {
 		if (name == null) {
-			throw new IllegalArgumentException("names must not be null");
+			throw new IllegalArgumentException("Names must not be null");
 		}
-		for(int i = 0; i < name.length; i++) {
+		for (int i = 0; i < name.length; i++) {
 			if (name[i] == null) {
-				throw new IllegalArgumentException("names must not be null");
+				throw new IllegalArgumentException("Names must not be null");
 			}
 			name[i] = name[i].trim();
 			if (name[i].isEmpty()) {
-				throw new IllegalArgumentException("names must contain at least one non-whitespace character");
+				throw new IllegalArgumentException("Names must contain at least one non-whitespace character");
 			}
 		}
 	}
@@ -169,8 +167,7 @@ public class TrainCompany {
 	}
 
 	private void updateRouteWithPrice(DirectRoute route, double price) throws DirectRouteNotFound {
-		DirectRoute routeToBeUpdated = getRouteWithFromStationAndToStation(
-				route.getFromStation(), route.getToStation());
+		DirectRoute routeToBeUpdated = getRoute(route.getFromStation(), route.getToStation());
 		routeToBeUpdated.setPrice(price);
 	}
 
@@ -178,8 +175,8 @@ public class TrainCompany {
 		directRouteCollection.remove(route);
 	}
 
-	private DirectRoute getRouteWithFromStationAndToStation(String fromStation, String toStation) throws DirectRouteNotFound {
-		DirectRoute[] directRoutes = (DirectRoute[]) directRouteCollection.toArray();
+	private DirectRoute getRoute(String fromStation, String toStation) throws DirectRouteNotFound {
+		DirectRoute[] directRoutes = (DirectRoute[]) directRouteCollection.toArray(new DirectRoute[directRouteCollection.size()]);
 		DirectRoute returnValue = null;
 		for (int i = 0; i < directRoutes.length; i++) {
 			DirectRoute cmp = directRoutes[i];
