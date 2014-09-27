@@ -55,7 +55,7 @@ public class TestTrainCompany {
 
 	@Test
 	public void shouldCreateDirectRoutesSuccessfully() {
-		TrainCompany tc = new TrainCompany("tc");
+		TrainCompany tc = new TrainCompany("tc_create");
 		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.LONDON, 50);
 		DirectRoute testRoute = tc.getDirectRoute(Constants.TORONTO, Constants.LONDON);
 		assertNotNull(testRoute);
@@ -63,7 +63,7 @@ public class TestTrainCompany {
 
 	@Test
 	public void shouldUpdateDirectRoutesSuccessfully() {
-		TrainCompany tc = new TrainCompany("tc");
+		TrainCompany tc = new TrainCompany("tc_update");
 		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.LONDON, 50);
 		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.LONDON, 100);
 		DirectRoute testRoute = tc.getDirectRoute(Constants.TORONTO, Constants.LONDON);
@@ -72,7 +72,7 @@ public class TestTrainCompany {
 
 	@Test
 	public void shouldDeleteDirectRoutesSuccessfully() {
-		TrainCompany tc = new TrainCompany("tc");
+		TrainCompany tc = new TrainCompany("tc_delete");
 		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.LONDON, 50);
 		tc.deleteDirectRoute(Constants.TORONTO, Constants.LONDON);
 		DirectRoute testRoute = tc.getDirectRoute(Constants.TORONTO, Constants.LONDON);
@@ -81,7 +81,7 @@ public class TestTrainCompany {
 
 	@Test
 	public void countDirectRoutesTest() {
-		TrainCompany tc = new TrainCompany("tc");
+		TrainCompany tc = new TrainCompany("tc_count");
 		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.LONDON, 50);
 		tc.createOrUpdateDirectRoute(Constants.LONDON, Constants.TORONTO, 50);
 		tc.createOrUpdateDirectRoute(Constants.OTTAWA, Constants.LONDON, 50);
@@ -90,7 +90,7 @@ public class TestTrainCompany {
 
 	@Test
 	public void getDirectRoutesFromTest() {
-		TrainCompany tc = new TrainCompany("tc");
+		TrainCompany tc = new TrainCompany("tc_from");
 		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.LONDON, 50);
 		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.WATERLOO, 50);
 		tc.createOrUpdateDirectRoute(Constants.LONDON, Constants.TORONTO, 50);
@@ -100,7 +100,7 @@ public class TestTrainCompany {
 
 	@Test
 	public void getDirectRoutesToTest() {
-		TrainCompany tc = new TrainCompany("tc");
+		TrainCompany tc = new TrainCompany("tc_to");
 		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.LONDON, 50);
 		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.WATERLOO, 50);
 		tc.createOrUpdateDirectRoute(Constants.LONDON, Constants.TORONTO, 50);
