@@ -12,12 +12,12 @@ Summary
 3. Communication Mediums
 	- Day-to-day on Facebook [group IM]
 	- On-line meetings on Skype
-4. Design Process
-	a) Process of choice: Test Driven development
-	b) Initial failing test
-	c) skeleton code to deal with simple test: constructors, setters and getters.
-	d) Continuous development using our work assignment strategy
-	e) Reaching our minimum viable product and detailing our final adjustments/amendments.
+4. Design Process  
+	a) Process of choice: Test Driven development  
+	b) Initial failing test  
+	c) skeleton code to deal with simple test: constructors, setters and getters.  
+	d) Continuous development using our work assignment strategy.  
+	e) Reaching our minimum viable product and detailing our final adjustments/amendments.  
 
 Communication
 --------------
