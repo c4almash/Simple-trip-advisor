@@ -1,0 +1,13 @@
+Via Rails
+Toronto,Ottawa,10
+Toronto,Montreal,15
+Vancouver,Ottawa,25
+Ottawa,Toronto,20
+Ottawa,Montreal,5
+Ottawa,Quebec,15
+Montreal,Halifax,20
+Halifax,Montreal,15
+Halifax,Quebec,35
+Quebec,Halifax,5
+Quebec,Vancouver,25
+Alberta,Vancouver,40
