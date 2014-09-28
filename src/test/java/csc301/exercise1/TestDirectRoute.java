@@ -95,7 +95,6 @@ public class TestDirectRoute {
 		new DirectRoute(cnr, Constants.TORONTO, Constants.MONTREAL, 37.5);
 	}
 
-
 	/*
 	 * Test that "a company cannot offer different prices for the same route".
 	 * Should we just update the price for that route instead?
