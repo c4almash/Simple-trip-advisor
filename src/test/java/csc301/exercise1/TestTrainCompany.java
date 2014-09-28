@@ -1,6 +1,7 @@
 package csc301.exercise1;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -12,14 +13,11 @@ import csc301.exercise1.util.Constants;
 import csc301.exercise1.util.Utils;
 
 public class TestTrainCompany {
+
 	private static TrainCompany ToStringTrain, PositivePriceTrain,
 	EmptyCountTrain, NormalCountTrain, FastTrain, GetNameTrain,
 	TestUpdateDirectRouteTrain, TestDeleteDirectRouteTrain,
 	TestAddGetDirectRoute;
-
-	/*
-	 * Test Train Company Names
-	 */
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -32,6 +30,11 @@ public class TestTrainCompany {
 		TestDeleteDirectRouteTrain = Utils.createCompanyFromDataFile("TestDeleteDirectRouteTrain.txt");
 		TestAddGetDirectRoute = Utils.createCompanyFromDataFile("TestAddGetDirectRouteTrain.txt");
 	}
+
+
+	/*
+	 * Test TrainCompany construct
+	 */
 
 	// An example of how to verify that an exception is thrown
 	@Test(expected = IllegalArgumentException.class)
@@ -71,45 +74,16 @@ public class TestTrainCompany {
 		new TrainCompany("	F\n");
 	}
 
-	@Test
-	public void testUpdateDirectRoute(){
-		assertEquals(new DirectRoute(TestUpdateDirectRouteTrain, Constants.MONTREAL, Constants.OTTAWA, 50), 
-				TestUpdateDirectRouteTrain.createOrUpdateDirectRoute(Constants.MONTREAL, Constants.OTTAWA, 50));
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldIgnoreWhitespaceInCompanyName() {
+		new TrainCompany(" E");
+		new TrainCompany("E ");
 	}
 
-	public void testDeleteDirectRoute(){
-		
-	}
 
-	@Test
-	public void testAddGetDirectRoute(){
-		assertEquals(new DirectRoute(TestAddGetDirectRoute, Constants.TORONTO, Constants.OTTAWA, 10), 
-				TestAddGetDirectRoute.getDirectRoute(Constants.TORONTO, Constants.OTTAWA));
-	}
-
-	public void testGetDirectRoutesFrom(){
-		
-	}
-
-	public void testGetRoutesTo(){
-		
-	}
-
-	public void testGetAllDirectRoutes(){
-		
-	}
-
-	@Test
-	public void testGetDirectRoutesCount(){
-		assertEquals(2, TestAddGetDirectRoute.getDirectRoutesCount());
-	}
-
-	@Test
-	public void emptyDirectRouteCollectionShouldNotReturnNull() {
-		TrainCompany tc = new TrainCompany("tc");
-		assertNotNull(tc.getAllDirectRoutes());
-		// should also test that it returns an empty collection
-	}
+	/*
+	 * Test TrainCompany toString
+	 */
 
     @Test
     public void testToString() {
@@ -117,10 +91,35 @@ public class TestTrainCompany {
 				FastTrain.toString());
 	}
 
+
+    /*
+     * Test getName, setName
+     */
+
     @Test
 	public void testGetName(){
 		assertEquals("GetNameTrain", GetNameTrain.getName());
-	}	
+	}
+
+    @Test
+	public void testSetName(){
+    	TrainCompany tsn = new TrainCompany("TestSetName");
+		assertEquals("TestSetName", tsn.getName());
+
+		tsn.setName("NameChanged");
+		assertNotEquals("TestSetName", tsn.getName());
+		assertEquals("NameChanged", tsn.getName());
+
+		tsn.setName("TestSetName");
+		assertNotEquals("NameChanged", tsn.getName());
+		assertEquals("TestSetName", tsn.getName());
+	}
+
+
+	/*
+	 * Tests for createOrUpdateDirectRoute, getDirectRoute,
+	 *           deleteDirectRoute
+	 */
 
 	@Test
 	public void shouldCreateDirectRoutesSuccessfully() {
@@ -128,6 +127,23 @@ public class TestTrainCompany {
 		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.LONDON, 50);
 		DirectRoute testRoute = tc.getDirectRoute(Constants.TORONTO, Constants.LONDON);
 		assertNotNull(testRoute);
+		assertEquals(testRoute, new DirectRoute(tc, Constants.TORONTO, Constants.LONDON, 50));
+	}
+
+	@Test
+	public void shouldGetDirectRoutesSuccessfully() {
+		TrainCompany tc = new TrainCompany("tc_read");
+
+		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.OTTAWA, 10);
+		DirectRoute r1 = tc.getDirectRoute(Constants.TORONTO, Constants.OTTAWA);
+		tc.createOrUpdateDirectRoute(Constants.OTTAWA, Constants.TORONTO, 20);
+		DirectRoute r2 = tc.getDirectRoute(Constants.OTTAWA, Constants.TORONTO);
+
+		assertNotNull(r1);
+		assertNotNull(r2);
+		
+		DirectRoute r3 = tc.getDirectRoute(Constants.TORONTO, Constants.LONDON);
+		assertNull(r3);
 	}
 
 	@Test
@@ -148,14 +164,10 @@ public class TestTrainCompany {
 		assertNull(testRoute);
 	}
 
-	@Test
-	public void countDirectRoutesTest() {
-		TrainCompany tc = new TrainCompany("tc_count");
-		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.LONDON, 50);
-		tc.createOrUpdateDirectRoute(Constants.LONDON, Constants.TORONTO, 50);
-		tc.createOrUpdateDirectRoute(Constants.OTTAWA, Constants.LONDON, 50);
-		assertTrue(tc.getDirectRoutesCount() == 3);
-	}
+
+	/*
+	 * Test getDirectRoutesFrom, getRoutesTo
+	 */
 
 	@Test
 	public void getDirectRoutesFromTest() {
@@ -177,8 +189,44 @@ public class TestTrainCompany {
 		assertTrue(tc.getRoutesTo(Constants.LONDON).size() == 2);
 	}
 
+
+	/*
+	 * Test getAllDirectRoutes, getDirectRoutesCount, getStationsCount
+	 */
+
+	@Test
+	public void shouldNotReturnNullForEmptyDirectRouteCollection() {
+		TrainCompany tc = new TrainCompany("tc");
+		assertNotNull(tc.getAllDirectRoutes());
+		// TODO: should also test that it returns an empty collection
+	}
+
+	@Test
+	public void countDirectRoutesTest() {
+		TrainCompany tc = new TrainCompany("tc_count");
+		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.LONDON, 50);
+		tc.createOrUpdateDirectRoute(Constants.LONDON, Constants.TORONTO, 50);
+		tc.createOrUpdateDirectRoute(Constants.OTTAWA, Constants.LONDON, 50);
+		assertTrue(tc.getDirectRoutesCount() == 3);
+	}
+
     @Test
 	public void testGetDirectRoutesCountEmpty() throws Exception{
 		assertEquals(0, EmptyCountTrain.getDirectRoutesCount());
 	}
+
+    public void testGetStationCount() {
+    	// TODO: implement this
+    }
+
+
+    /*
+     * Test edge cases
+     */
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldNotAllowMovingToTheSamePlace() {
+    	TrainCompany ttc = new TrainCompany("TTC");
+    	ttc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.TORONTO, 3);
+    }
 }
