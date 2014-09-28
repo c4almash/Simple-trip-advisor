@@ -86,35 +86,4 @@ public class TestDirectRoute {
 		new DirectRoute(cnr, "A", "B ", 37.5);
 		new DirectRoute(cnr, " C", " D ", 37.5);
 	}
-
-	// Not sure if creating duplicate route should throw error or gracefully fall back and
-	// return the existing route..
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotAllowStationWithSameNames() {
-		new DirectRoute(cnr, Constants.TORONTO, Constants.MONTREAL, 37.5);
-		new DirectRoute(cnr, Constants.TORONTO, Constants.MONTREAL, 37.5);
-	}
-
-	/*
-	 * Test that "a company cannot offer different prices for the same route".
-	 * Should we just update the price for that route instead?
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotCreateExistingRouteWithDifferentPrices() {
-		new DirectRoute(cpr, Constants.TORONTO, Constants.MONTREAL, 37.5);
-		new DirectRoute(cpr, Constants.TORONTO, Constants.MONTREAL, 36);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotAllowSameValueForFromStationAndToStation() {
-		new DirectRoute(cpr, Constants.TORONTO, Constants.TORONTO, 50);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotAllowSameValueForFromStationAndToStationWithStringObjects() {
-		String toronto = new String("Toronto");
-		String toronto2 = new String("Toronto");
-
-		new DirectRoute(cpr, toronto, toronto2, 50);
-	}
 }
