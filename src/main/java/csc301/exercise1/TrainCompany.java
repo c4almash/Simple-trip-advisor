@@ -69,10 +69,11 @@ public class TrainCompany {
 	 */
 	public void setName(String name) {
 		checkStrings(name);
-		if (trainCompanyNameList.contains(name.trim())) {
+		name = name.trim();
+		if (trainCompanyNameList.contains(name)) {
 			throw new IllegalArgumentException("Two instances of TrainCompany cannot have the same name");
 		}
-		this.name = name.trim();
+		this.name = name;
 		trainCompanyNameList.add(this.name);
 	}
 	
@@ -81,6 +82,8 @@ public class TrainCompany {
 	 * 			<code>toStation</code> with this TrainCompany.
 	 */
 	public DirectRoute getDirectRoute(String fromStation, String toStation){
+		fromStation = fromStation.trim();
+		toStation = toStation.trim();
 		try {
 			return getRoute(fromStation, toStation);
 		} catch (DirectRouteNotFound e) {
@@ -103,6 +106,9 @@ public class TrainCompany {
 		checkStrings(fromStation, toStation);
 		checkPrice(price);
 		
+		fromStation = fromStation.trim();
+		toStation = toStation.trim();
+		
 		DirectRoute newRoute = new DirectRoute(this, fromStation, toStation, price);
 		try {
 			this.updateRoutePrice(newRoute, price);
@@ -123,6 +129,9 @@ public class TrainCompany {
 	 */
 	public void deleteDirectRoute(String fromStation, String toStation){
 		checkStrings(fromStation, toStation);
+		fromStation = fromStation.trim();
+		toStation = toStation.trim();
+
 		try {
 			this.deleteRoute(this.getRoute(fromStation, toStation));
 		} catch (DirectRouteNotFound e) {
@@ -137,6 +146,7 @@ public class TrainCompany {
 	 */
 	public Collection<DirectRoute> getDirectRoutesFrom(String fromStation){
 		checkStrings(fromStation);
+		fromStation = fromStation.trim();
 
 		DirectRoute[] directRoutes = (DirectRoute[]) directRouteCollection.toArray(new DirectRoute[directRouteCollection.size()]);
 		Collection<DirectRoute> routesFrom = new ArrayList<DirectRoute>();
@@ -159,6 +169,7 @@ public class TrainCompany {
 	 */
 	public Collection<DirectRoute> getRoutesTo(String toStation){
 		checkStrings(toStation);
+		toStation = toStation.trim();
 
 		DirectRoute[] directRoutes = (DirectRoute[]) directRouteCollection.toArray(new DirectRoute[directRouteCollection.size()]);
 		Collection<DirectRoute> routesTo = new ArrayList<DirectRoute>();

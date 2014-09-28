@@ -87,18 +87,11 @@ public class TestDirectRoute {
 		new DirectRoute(cnr, "A", "B ", 37.5);
 		new DirectRoute(cnr, " C", " D ", 37.5);
 	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotAllowSameValueForFromStationAndToStation() {
-		new DirectRoute(cpr, Constants.TORONTO, Constants.TORONTO, 50);
+	
+	@Test
+	public void routeNamesShouldIgnoreTrailingWhitespace() {
+		DirectRoute cmp1 = new DirectRoute(cnr, "A", "B ", 37.5);
+		DirectRoute cmp2 = new DirectRoute(cnr, " A		\n", " B ", 37.5);
+		assertTrue(cmp1.equals(cmp2));
 	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotAllowSameValueForFromStationAndToStationWithStringObjects() {
-		String toronto = new String("Toronto");
-		String toronto2 = new String("Toronto");
-
-		new DirectRoute(cpr, toronto, toronto2, 50);
-	}
-
 }

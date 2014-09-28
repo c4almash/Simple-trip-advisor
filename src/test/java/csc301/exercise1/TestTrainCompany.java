@@ -64,6 +64,12 @@ public class TestTrainCompany {
 		new TrainCompany("E");
 		new TrainCompany("E");
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldNotCreateCompanyWithSameNameEvenWithTrailingWhitespace() {
+		new TrainCompany("F ");
+		new TrainCompany("	F\n");
+	}
 
 	@Test
 	public void testUpdateDirectRoute(){
