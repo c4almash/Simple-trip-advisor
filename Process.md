@@ -22,3 +22,21 @@ members were to assign themselves to issues they are willing/able to fix. Issues
 Mini Case Study - "We decided to do X, because we thought Y, and, after trying it for a week, we think Z"
 ---------------------------------------------------------------------------------------------------------
 The issue of using a double or long [data type] for price of ticket came up in our last meeting. One of the team members was concerned that if our implementation didn't output an accurate enough [not rounded] price of tickets we could potentially fail some JUnit test cases. Our initial implementation was a long but after a we discussed the design aspect we came to realize that a double is more appropriate. This is due to the fact that the price is more likely to be a decimal than a large integer.  
+
+Anything else that might give your TA/Instructor an insight to your development process
+--------------------------------------------------------------------------------------
+The getters and setters along with constructor were first implemented
+to get some of the initial tests passing. We've then started to write additional failing test cases in accordance
+with TDD principles.
+
+Important Decision
+------------------
+We agreed to do day-to-day code in our personal repo then do a pull request with the master towards the end of the excersise.
+
+
+
+
+_______________________________________________________________________________________
+- If you have too many things to write, focus on the highlights (e.g. The best, worst, and most interesting decisions you've made).
+- Review your text for typos.
+- Focus on content, not power words.
