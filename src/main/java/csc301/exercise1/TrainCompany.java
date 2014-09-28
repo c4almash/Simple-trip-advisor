@@ -26,10 +26,10 @@ public class TrainCompany {
 	private String name;
 
 	/**
-	 *	Construct a new TrainCompany Object.
+	 * Construct a new TrainCompany Object.
 	 *
-	 * 	@param 	name						The name of the company.
-	 * 	@throws	IllegalArgumentException	if <code>name</code> is null or containing whitespace only;
+	 * @param 	name						The name of the company.
+	 * @throws	IllegalArgumentException	if <code>name</code> is null or containing whitespace only;
 	 * 										And if there exists a train company in <code>trainCompanyNameList</code>
 	 * 										with the same name.
 	 */
@@ -38,8 +38,8 @@ public class TrainCompany {
 	}
 		
 	/**
-	 *	@return details of the train station as one single string, in the format of
-	 *	"[<code>name</code>], offering [number of routes in <code>directRouteCollection</code>] routes between [number of total stations] stations".
+	 * @return details of the train station as one single string, in the format of
+	 * "[<code>name</code>], offering [number of routes in <code>directRouteCollection</code>] routes between [number of total stations] stations".
 	 */
 	@Override
 	public String toString() {
@@ -48,17 +48,17 @@ public class TrainCompany {
 	}
 	
 	/**
-	 *	@return the name of the train company.
+	 * @return the name of the train company.
 	 */
 	public String getName() {
 		return this.name;
 	}
 	
 	/**
-	 *	Set the name of the train company.
+	 * Set the name of the train company.
 	 *
-	 * 	@param	name						The name of the station.
-	 * 	@throws	IllegalArgumentException	if <code>name</code> is null or containing whitespace only;
+	 * @param	name						The name of the station.
+	 * @throws	IllegalArgumentException	if <code>name</code> is null or containing whitespace only;
 	 * 										And if there exists a train company in <code>trainCompanyNameList</code>
 	 * 										with the same name.
 	 */
@@ -112,10 +112,10 @@ public class TrainCompany {
 	/**
 	 * Add direct route to the company's <code>directRouteCollection</code>.
 	 * 
-	 *  @param	fromStation					The departure station of the route.
-	 *  @param	toStation					The terminal station of the route.
-	 *  @param	price						The price of the route.
-	 * 	@throws	IllegalArgumentException	if there exists a same route in <code>directRouteCollection</code>
+	 * @param	fromStation					The departure station of the route.
+	 * @param	toStation					The terminal station of the route.
+	 * @param	price						The price of the route.
+	 * @throws	IllegalArgumentException	if there exists a same route in <code>directRouteCollection</code>
 	 */
 	public void addDirectRoute(String fromStation, String toStation, double price) {
 		directRouteCollection.add(createOrUpdateDirectRoute(fromStation, toStation, price));

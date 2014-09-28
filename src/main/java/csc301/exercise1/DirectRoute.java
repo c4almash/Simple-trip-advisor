@@ -1,13 +1,13 @@
 package csc301.exercise1;
 
 /**
- *	The DirectRoute class represents a direct route from the one station to the other. 
+ * The DirectRoute class represents a direct route from the one station to the other. 
  *
- *	<P> It contains the following information of the direct route:
- *		- <code>trainCompany</code>:	the train company that offers the route.
- *		- <code>fromStation</code>:		the departure station of the route.
- *		- <code>toStation</code>:		the terminal station of the route.
- *		- <code>price</code>:			the price of the route.
+ * <P> It contains the following information of the direct route:
+ * - <code>trainCompany</code>:		the train company that offers the route.
+ * - <code>fromStation</code>:		the departure station of the route.
+ * - <code>toStation</code>:		the terminal station of the route.
+ * - <code>price</code>:			the price of the route.
  * 
  * @author c4almash
  * @author g3abby
@@ -28,18 +28,18 @@ public class DirectRoute {
 	private double price;
 	
 	/**
-	 *	Construct a new DirectRoute Object.
+	 * Construct a new DirectRoute Object.
 	 * 
-	 *	@param 		trainCompany				The company that offers the route.
-	 *	@param 		fromStation					The departure station (origin) of the route.
-	 *	@param 		toStation					The terminal station (destination) of the route. 
-	 *	@param		price						The price of the route.
-	 *	@throws 	IllegalArgumentException	if <code>trainCompany</code> is null;
-	 * 											And if <code>fromStation</code> or <code>toStation</code> is null, 
-	 * 											or containing whitespace only; 
-	 * 											And if <code>price</code> is null or negative.
-	 * 											And if <code>fromStation</code> and <code>toStation</code> are
-	 * 											the same.
+	 * @param 	trainCompany				The company that offers the route.
+	 * @param 	fromStation					The departure station (origin) of the route.
+	 * @param	toStation					The terminal station (destination) of the route. 
+	 * @param	price						The price of the route.
+	 * @throws 	IllegalArgumentException	if <code>trainCompany</code> is null;
+	 * 										And if <code>fromStation</code> or <code>toStation</code> is null, 
+	 * 										or containing whitespace only; 
+	 * 										And if <code>price</code> is null or negative.
+	 * 										And if <code>fromStation</code> and <code>toStation</code> are
+	 * 										the same.
 	 */
 	public DirectRoute(TrainCompany trainCompany, String fromStation, String toStation, double price) {
 		setTrainCompany(trainCompany);
@@ -49,17 +49,17 @@ public class DirectRoute {
 	}
 
 	/** 
-	 *	@return the train company that offers the direct route. 
+	 * @return the train company that offers the direct route. 
 	 */
 	public TrainCompany getTrainCompany() {
 		return this.trainCompany;
 	}
 	
 	/**
-	 *	Set the train company that offers the direct route. 
+	 * Set the train company that offers the direct route. 
 	 * 
-	 *  @param	trainCompany				The trainComany that offers the DirectRoute.
-	 *  @throws	IllegalArgumentException	Exception will be thrown if <code>trainCompany</code> is null.
+	 * @param	trainCompany				The trainComany that offers the DirectRoute.
+	 * @throws	IllegalArgumentException	Exception will be thrown if <code>trainCompany</code> is null.
 	 */
 	public void setTrainCompany(TrainCompany trainCompany) {
 		if (trainCompany == null) {
@@ -69,17 +69,17 @@ public class DirectRoute {
 	}
 	
 	/**
-	 *	@return the departure station of the direct route.
+	 * @return the departure station of the direct route.
 	 */
 	public String getFromStation() {
 		return this.fromStation;
 	}
 	
 	/**
-	 *	Set the departure station of the direct route.
+	 * Set the departure station of the direct route.
 	 * 
-	 *	@param	fromStation					The departure station of the DirectRoute.
-	 *	@throws	IllegalArgumentException	if <code>fromStation</code> is null, 
+	 * @param	fromStation					The departure station of the DirectRoute.
+	 * @throws	IllegalArgumentException	if <code>fromStation</code> is null, 
 	 * 										or containing whitespace only.
 	 */
 	public void setFromStation(String fromStation) {
@@ -94,17 +94,17 @@ public class DirectRoute {
 	}
 
 	/**
-	 *	@return the terminal station of the direct route.
+	 * @return the terminal station of the direct route.
 	 */
 	public String getToStation() {
 		return this.toStation;
 	}
 	
 	/**
-	 *	Set the terminal station of the direct route.
+	 * Set the terminal station of the direct route.
 	 * 
-	 *	@param	toStation					The terminal station of the direct route.
-	 *	@throws	IllegalArgumentException	if <code>toStation</code> is null,
+	 * @param	toStation					The terminal station of the direct route.
+	 * @throws	IllegalArgumentException	if <code>toStation</code> is null,
 	 * 										or containing whitespace only.
 	 */
 	public void setToStation(String toStation) {
@@ -119,17 +119,17 @@ public class DirectRoute {
 	}
 
 	/**
-	 *  @return the price of the direct route.
+	 * @return the price of the direct route.
 	 */
 	public double getPrice() {
 		return this.price;
 	}
 	
 	/**
-	 *	Set the price of the direct route.
+	 * Set the price of the direct route.
 	 *
-	 *	@param	price						The price of the direct route.
-	 *	@throws	IllegalArgumentException	if <code>price</code> is negative.
+	 * @param	price						The price of the direct route.
+	 * @throws	IllegalArgumentException	if <code>price</code> is negative.
 	 */
 	public void setPrice(double price) {
 		if (price < 0) {
@@ -139,12 +139,12 @@ public class DirectRoute {
 	}
 	
 	/**
-	 *	@return true/false based on the equality of two direct routes.
+	 * @return true/false based on the equality of two direct routes.
 	 *
-	 *	@param	obj						Another direct route to be compared.
-	 *	@return	<tt>true</tt>			if and only if all four attributes of 
+	 * @param	obj						Another direct route to be compared.
+	 * @return	<tt>true</tt>			if and only if all four attributes of 
 	 *									both routes are exactly the same.
-	 *	@throws	ClassCastException		if <code>obj</code> cannot be casted t a DirectRoute.
+	 * @throws	ClassCastException		if <code>obj</code> cannot be casted t a DirectRoute.
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -155,8 +155,8 @@ public class DirectRoute {
 	}
 	
 	/**
-	 *	@return the details of the direct route as one single String, in the format of 
-	 *	"[<code>trainCompany</code>] from [<code>fromStation</code>] to [<code>toStation</code>], [<code>price</code>]"
+	 * @return the details of the direct route as one single String, in the format of 
+	 * "[<code>trainCompany</code>] from [<code>fromStation</code>] to [<code>toStation</code>], [<code>price</code>]"
 	 */
 	@Override
 	public String toString() {
