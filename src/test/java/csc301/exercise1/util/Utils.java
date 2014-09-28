@@ -21,13 +21,14 @@ public class Utils {
 	public static TrainCompany createCompanyFromDataFile(String dataFileName) throws IOException{
 		InputStream in = ClassLoader.getSystemResourceAsStream(dataFileName);
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));
-		
+
 		// The first line of the file should contain the company's name
 		String line = br.readLine();
 		TrainCompany company = new TrainCompany(line.trim());
 		
 		// The next lines are expected to be of the format fromStation,toStation,price
 		line = br.readLine();
+		
 		while(line != null){
 			line = line.trim();
 			// Skip blank lines
@@ -45,6 +46,4 @@ public class Utils {
 		br.close();
 		return company;
 	}
-	
-	
 }
