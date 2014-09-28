@@ -1,7 +1,10 @@
 package csc301.exercise1;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import csc301.exercise1.util.Utils;
 
 class DirectRouteNotFound extends Exception
 {
@@ -59,6 +62,7 @@ public class TrainCompany {
 	 * Delete the specified route, if it exists.
 	 */
 	public void deleteDirectRoute(String fromStation, String toStation){
+		checkError(fromStation, toStation);
 		try {
 			this.deleteRoute(this.getRoute(fromStation, toStation));
 		} catch (DirectRouteNotFound e) {
@@ -197,6 +201,5 @@ public class TrainCompany {
 		} else {
 			return returnValue;
 		}
-
 	}
 }

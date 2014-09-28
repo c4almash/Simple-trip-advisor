@@ -3,17 +3,31 @@ package csc301.exercise1;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-
+import junit.framework.TestCase;
 import org.junit.Test;
 
 import csc301.exercise1.util.Constants;
-
+import csc301.exercise1.util.Utils;
 public class TestTrainCompany {
-
+	private static TrainCompany ToStringTrain, PositivePriceTrain,
+	EmptyCountTrain, NormalCountTrain, FastTrain, GetNameTrain,
+	TestUpdateDirectRouteTrain, TestDeleteDirectRouteTrain,
+	TestAddGetDirectRoute;
 	/*
 	 * Test Train Company Names
 	 */
 
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		// Create TrainCompany instances from data files in the resources folder.
+		EmptyCountTrain = Utils.createCompanyFromDataFile("EmptyCountTrain.txt");
+		ToStringTrain = Utils.createCompanyFromDataFile("ToStringTrain.txt");
+		GetNameTrain = Utils.createCompanyFromDataFile("GetNameTrain.txt");
+		TestUpdateDirectRouteTrain = Utils.createCompanyFromDataFile("TestUpdateDirectRouteTrain.txt");
+		TestDeleteDirectRouteTrain = Utils.createCompanyFromDataFile("TestDeleteDirectRouteTrain.txt");
+		TestAddGetDirectRoute = Utils.createCompanyFromDataFile("TestAddGetDirectRouteTrain.txt");
+	}
+	
 	// An example of how to verify that an exception is thrown
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldNotCreateCompanyWithNullName() {
@@ -52,6 +66,17 @@ public class TestTrainCompany {
 		assertNotNull(tc.getAllDirectRoutes());
 		// should also test that it returns an empty collection
 	}
+
+    @Test
+    public void testToString() {
+		assertEquals("FastTrain, offering 2 routes between 3 stations",
+				FastTrain.toString());
+	}
+
+    @Test
+	public void testGetName(){
+		assertEquals("GetNameTrain", GetNameTrain.getName());
+	}	
 
 	@Test
 	public void shouldCreateDirectRoutesSuccessfully() {
@@ -107,4 +132,9 @@ public class TestTrainCompany {
 		tc.createOrUpdateDirectRoute(Constants.OTTAWA, Constants.LONDON, 50);
 		assertTrue(tc.getRoutesTo(Constants.LONDON).size() == 2);
 	}
+
+    @Test
+	public void testGetDirectRoutesCountEmpty() throws Exception{
+		assertEquals(0, EmptyCountTrain.getDirectRoutesCount());
+	}	
 }

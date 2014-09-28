@@ -3,7 +3,6 @@ package csc301.exercise1;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -68,7 +67,6 @@ public class TestDirectRoute {
 		assertTrue(dr1.equals(dr2));
 	}
 
-
 	/*
 	 * Test Station names
 	 * Assume station names stored in this class
@@ -120,5 +118,4 @@ public class TestDirectRoute {
 
 		new DirectRoute(cpr, toronto, toronto2, 50);
 	}
-
 }
