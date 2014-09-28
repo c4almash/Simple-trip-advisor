@@ -1,0 +1,3 @@
+ToStringTrain
+Toronto,Ottawa,25
+Montreal,Toronto,40

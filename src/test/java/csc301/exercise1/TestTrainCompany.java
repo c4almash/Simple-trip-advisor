@@ -26,6 +26,7 @@ public class TestTrainCompany {
 		EmptyCountTrain = Utils.createCompanyFromDataFile("EmptyCountTrain.txt");
 		ToStringTrain = Utils.createCompanyFromDataFile("ToStringTrain.txt");
 		GetNameTrain = Utils.createCompanyFromDataFile("GetNameTrain.txt");
+		FastTrain = Utils.createCompanyFromDataFile("FastTrain.txt");
 		TestUpdateDirectRouteTrain = Utils.createCompanyFromDataFile("TestUpdateDirectRouteTrain.txt");
 		TestDeleteDirectRouteTrain = Utils.createCompanyFromDataFile("TestDeleteDirectRouteTrain.txt");
 		TestAddGetDirectRoute = Utils.createCompanyFromDataFile("TestAddGetDirectRouteTrain.txt");
