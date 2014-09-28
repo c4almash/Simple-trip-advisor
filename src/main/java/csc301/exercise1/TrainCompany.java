@@ -123,7 +123,7 @@ public class TrainCompany {
 	
 
 	/**
-	 * @return 	null if there is no route from <code>fromStation</code> to
+	 * @return	null if there is no route from <code>fromStation</code> to
 	 * <code>toStation</code> with this train company.
 	 * @throws	IllegalArgumentException	if <code>fromStation</code> or <code>toStation</code> is null,
 	 * 										or containing whitespace only.
