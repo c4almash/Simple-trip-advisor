@@ -12,34 +12,12 @@ import csc301.exercise1.util.Utils;
 
 public class TestMyTripAdvisor {
 
-	
-	/*
-	 * You can use the starter code as an example of how to write tests
-	 * a bit more efficiently, and cleanly. 
-	 * You don't have to use our technique, we are just suggesting something that
-	 * you might find it useful.
-	 * 
-	 * Here's a description of what we do:
-	 * 1. We store a train-company's data in a text file.
-	 * 2. Before each test, we load all of the data from the files to local variables.
-	 *    Note: This is inefficient, and would be an issue in a project that has many 
-	 *    tests and data files. For this exercise, we chose to not worry about this issue.
-	 * 
-	 * Technical notes:
-	 * - All data files are stored in src/test/resources.
-	 *   This is important! If you data files are not stored with the project, we will
-	 *   not be able to use them, when running your tests.
-	 * - We've defined some utility classes in src/test/java/csc301/exercise1/util.
-	 *   Feel free to add/modify code in these classes.
-	 * - You might find it useful to come up with a few more utility functions that
-	 *   will help you write cleaner tests.
-	 *   
-	 * TODO: Delete this comment before you submit the assignment.
-	 */
-	
-	
 	private static TrainCompany fastTrain;
 	private static TrainCompany swiftRail;
+	private static TrainCompany moonTrain;
+	private static TrainCompany rubyOnRails;
+	private static TrainCompany viaRail;
+	private static TrainCompany goTrain;
 
 
 	@BeforeClass
@@ -47,27 +25,22 @@ public class TestMyTripAdvisor {
 		// Create TrainCompany instances from data files in the resources folder.
 		fastTrain = Utils.createCompanyFromDataFile("FastTrain.txt");
 		swiftRail = Utils.createCompanyFromDataFile("SwiftRail.txt");
+		moonTrain = Utils.createCompanyFromDataFile("MoonTrain.txt");
+		rubyOnRails = Utils.createCompanyFromDataFile("RubyOnRails.txt");
+		viaRail = Utils.createCompanyFromDataFile("ViaRail.txt");
+		goTrain = Utils.createCompanyFromDataFile("GOTrain.txt");
 	}
 
 	
 	
-	
-	/*
-	 * We added two examples of a tests, feel free to edit/remove them.
-	 * 
-	 * Notice how we set a timeout of 3000ms - If the trip advisor that we're testing
-	 * is broken, and goes into an infinite loop, our tests will not get stuck, they
-	 * will just fail after 3 seconds.
-	 * 
-	 * TODO: Delete this comment before you submit the assignment.
-	 */
+
 	
 	@Test(timeout=3000)
 	public void twoRouteTripWhereRoutesAreFromDifferentCompanies() {
 		MyTripAdvisor advisor = new MyTripAdvisor();
 		advisor.addTrainCompany(fastTrain);
 		advisor.addTrainCompany(swiftRail);
-		
+
 		List<DirectRoute> trip = advisor.getCheapestTrip(Constants.TORONTO, Constants.MONTREAL);
 		
 		// Make sure that we got the route we expect
@@ -87,6 +60,61 @@ public class TestMyTripAdvisor {
 		assertTrue(55 == advisor.getCheapestPrice(Constants.TORONTO, Constants.MONTREAL));
 	}
 
+	@Test(timeout=3000)
+	public void nonExistentTrip() {
+		MyTripAdvisor advisor = new MyTripAdvisor();
+		advisor.addTrainCompany(moonTrain);
+		
+		assertTrue(null == advisor.getCheapestTrip(Constants.TORONTO, Constants.MONTREAL));
+	}
+	
+	@Test(timeout=3000)
+	public void nonExistentPrice() {
+		MyTripAdvisor advisor = new MyTripAdvisor();
+		advisor.addTrainCompany(viaRail);
+		
+		assertTrue(-1 == advisor.getCheapestPrice(Constants.TORONTO, Constants.LONDON));
+	}
+
+	@Test(timeout=3000)
+	public void equalPriceForTwoRoutes() {
+		MyTripAdvisor advisor = new MyTripAdvisor();
+		advisor.addTrainCompany(viaRail);
+		assertTrue(50 == advisor.getCheapestPrice(Constants.MONTREAL, Constants.VANCOUVER));
+	}
+	
+	@Test(timeout=3000)
+	public void multipleWaysToGetToDestinationPrice() {
+		MyTripAdvisor advisor = new MyTripAdvisor();
+		advisor.addTrainCompany(viaRail);
+		assertTrue(25 == advisor.getCheapestPrice(Constants.TORONTO, Constants.WATERLOO));
+	}
+	
+	@Test(timeout=3000)
+	public void multipleWaysToGetToDestinationTrip() {
+		MyTripAdvisor advisor = new MyTripAdvisor();
+		advisor.addTrainCompany(viaRail);
+		advisor.addTrainCompany(rubyOnRails);
+		
+		List<DirectRoute> trip = advisor.getCheapestTrip(Constants.TORONTO, Constants.WATERLOO);
+		
+		assertEquals(new DirectRoute(rubyOnRails, Constants.TORONTO, Constants.VANCOUVER, 10), trip.get(0));
+		assertEquals(new DirectRoute(rubyOnRails, Constants.VANCOUVER, Constants.WATERLOO, 5), trip.get(1));
+	}
+	
+	@Test(timeout=3000)
+	public void sameFromStationAndToStationPrice() {
+		MyTripAdvisor advisor = new MyTripAdvisor();
+		advisor.addTrainCompany(goTrain);
+		assertTrue(0 == advisor.getCheapestPrice(Constants.TORONTO, Constants.TORONTO));
+	}
+	
+	@Test(timeout=3000)
+	public void sameFromStationAndToStationTrip() {
+		MyTripAdvisor advisor = new MyTripAdvisor();
+		advisor.addTrainCompany(goTrain);
+		assertTrue(0 == advisor.getCheapestTrip(Constants.TORONTO, Constants.TORONTO).size());
+	}
 
 	// Adding a null company is not allowed
 	@Test(expected = IllegalArgumentException.class)
