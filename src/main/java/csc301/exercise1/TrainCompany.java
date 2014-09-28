@@ -70,6 +70,9 @@ public class TrainCompany {
 	public void setName(String name) {
 		checkStrings(name);
 		name = name.trim();
+		
+		trainCompanyNameList.remove(this.getName());
+		
 		if (trainCompanyNameList.contains(name)) {
 			throw new IllegalArgumentException("Two instances of TrainCompany cannot have the same name");
 		}
