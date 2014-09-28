@@ -189,9 +189,23 @@ public class TestTrainCompany {
 
 	@Test
 	public void shouldNotReturnNullForEmptyDirectRouteCollection() {
-		TrainCompany tc = new TrainCompany("tc");
+		TrainCompany tc = new TrainCompany("tc_empty1");
 		assertNotNull(tc.getAllDirectRoutes());
-		// TODO: should also test that it returns an empty collection
+	}
+	
+	@Test
+	public void getAllDirectRoutesOnNewTrainCompanyShouldBeEmpty() {
+		TrainCompany tc = new TrainCompany("tc_empty2");
+		assertTrue(tc.getAllDirectRoutes().isEmpty());
+	}
+	
+	@Test
+	public void getAllDirectRoutesTest() {
+		TrainCompany tc = new TrainCompany("tc_allroutes");
+		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.LONDON, 50);
+		tc.createOrUpdateDirectRoute(Constants.LONDON, Constants.TORONTO, 50);
+		tc.createOrUpdateDirectRoute(Constants.OTTAWA, Constants.LONDON, 50);
+		assertNotNull(tc.getAllDirectRoutes().size() == 3);
 	}
 
 	@Test
@@ -209,7 +223,11 @@ public class TestTrainCompany {
 	}
 
     public void testGetStationCount() {
-    	// TODO: implement this
+    	TrainCompany tc = new TrainCompany("tc_stations_count");
+		tc.createOrUpdateDirectRoute(Constants.TORONTO, Constants.LONDON, 50);
+		tc.createOrUpdateDirectRoute(Constants.LONDON, Constants.TORONTO, 50);
+		tc.createOrUpdateDirectRoute(Constants.OTTAWA, Constants.LONDON, 50);
+		assertTrue(tc.getStationsCount() == 3);
     }
 
 
