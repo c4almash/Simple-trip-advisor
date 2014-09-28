@@ -19,6 +19,11 @@ public class TestDirectRoute {
 		cpr = new TrainCompany("Canadian Pacific Railway");
 	}
 
+
+	/*
+	 * Test DirectRoute construct
+	 */
+
 	// A very basic example of a passing test
 	@Test
 	public void testCreateInstanceWithoutException() {
@@ -26,26 +31,75 @@ public class TestDirectRoute {
 	}
 
 	@Test
-	public void createMultipleUniqueInstancesWithoutException() {
+	public void shouldCreateMultipleUniqueInstancesWithoutException() {
 		new DirectRoute(cnr, Constants.TORONTO, Constants.OTTAWA, 37.5);
 		new DirectRoute(cpr, Constants.TORONTO, Constants.OTTAWA, 37.5);
 	}
 
-	/*
-	 * Test trainCompany attribute of DirectRoute
-	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void trainCompanyMustNotBeNull() {
+	public void shouldNotAllowCompanyWithNullName() {
 		new DirectRoute(null, Constants.TORONTO, Constants.MONTREAL, 37.5);
 	}
 
-	/*
-	 * Test price attribute of DirectRoute
-	 */	
 	@Test(expected = IllegalArgumentException.class)
-	public void priceMustBeNonNegative() {
+	public void shouldNotAllowStationWithNullNames() {
+		new DirectRoute(cnr, null, null, 37.5);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldNotAllowStationWithEmptyOrBlankNames() {
+		new DirectRoute(cnr, "", " ", 37.5);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldNotAllowNegativePrice() {
 		new DirectRoute(viaRail, Constants.TORONTO, Constants.MONTREAL, -1);
 	}
+
+	@Test
+	public void allowStationWithNonWhitespaceNames() {
+		new DirectRoute(cnr, "A", "B ", 37.5);
+		new DirectRoute(cnr, " C", " D ", 37.5);
+	}
+
+
+	/*
+	 * Test getTrainCompany, setTrainCompany
+	 */
+
+	public void testGetTrainCompany() {
+		// TODO: implement this
+	}
+
+	public void testSetTrainCompany() {
+		// TODO: implement this
+	}
+
+
+	/*
+	 * Test getFromStation, setFromStation
+	 *      getToStation, setToStation
+	 */
+
+	// TODO: implement these
+
+
+	/*
+	 * Test getPrice, setPrice
+	 */
+
+	public void testGetPrice() {
+		// TODO: implement this
+	}
+
+	public void testSetPrice() {
+		// TODO: implement this
+	}
+
+
+	/*
+	 * Test equals
+	 */
 
 	@Test
 	public void testDifferentRoutes() {
@@ -66,26 +120,6 @@ public class TestDirectRoute {
 		DirectRoute dr2 = new DirectRoute(viaRail, from2, to2, 1);
 
 		assertTrue(dr1.equals(dr2));
-	}
-
-	/*
-	 * Test Station names
-	 * Assume station names stored in this class
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotAllowStationWithNullNames() {
-		new DirectRoute(cnr, null, null, 37.5);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotAllowStationWithEmptyOrBlankNames() {
-		new DirectRoute(cnr, "", " ", 37.5);
-	}
-
-	@Test
-	public void allowStationWithNonWhitespaceNames() {
-		new DirectRoute(cnr, "A", "B ", 37.5);
-		new DirectRoute(cnr, " C", " D ", 37.5);
 	}
 	
 	@Test
