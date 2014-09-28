@@ -1,5 +1,6 @@
-Test Driven Development
+Team 1 Development Process
 =======================
+**Authors:  c4almash, g3abby, g3aishih, oneohtrix, SunnyLi, timothylai**
 Summary
 -------
 1. Meetings
