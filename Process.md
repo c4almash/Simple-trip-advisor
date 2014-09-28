@@ -1,6 +1,6 @@
 Team 1 Development Process
 =======================
-**Authors:  c4almash, g3abby, g3aishih, oneohtrix, SunnyLi, timothylai**
+_**Authors:  c4almash, g3abby, g3aishih, oneohtrix, SunnyLi, timothylai**_
 Summary
 -------
 1. Meetings
