@@ -3,15 +3,26 @@ package csc301.exercise1;
 import java.util.List;
 import java.util.ArrayList;
 
-
+/**
+ * The MyTripAdvisor class represents the trip advisor that provides users the cheapest trip and price.
+ */
 public class MyTripAdvisor {
 
+	/* List that keeps track of all train companies. */
 	private List<TrainCompany> trainCompanyList = new ArrayList<TrainCompany>();
-	
+	/* Constructor */
 	public MyTripAdvisor() {
 	}
 	
-	
+	/**
+	 * Add new train company to <code>trainCompanyList</code>.
+	 * 
+	 * @param	TrainCompany				The new train company to be added.
+	 * @throws	IllegalArgumentException	if the name of <code>trainCompany</code> is null
+	 * 										or containing whitespace only;
+	 * 										And if there exist a company in <code>trainCompanyList</code>
+	 * 										with the same name.
+	 */
 	public void addTrainCompany(TrainCompany trainCompany){
 		if (trainCompany == null) {
 			throw new IllegalArgumentException("Adding a null company is not allowed");
