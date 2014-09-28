@@ -1,10 +1,7 @@
 package csc301.exercise1;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import csc301.exercise1.util.Utils;
 
 class DirectRouteNotFound extends Exception
 {
@@ -14,7 +11,7 @@ class DirectRouteNotFound extends Exception
       {
          super(message);
       }
- }
+}
 
 /**
  * The TrainCompany class represents a train company that offers direct train routes.

@@ -42,6 +42,9 @@ public class DirectRoute {
 	 * 										the same.
 	 */
 	public DirectRoute(TrainCompany trainCompany, String fromStation, String toStation, double price) {
+		if (fromStation.equals(toStation)) {
+			throw new IllegalArgumentException("From station and to Station cannot be the same");
+		}
 		setTrainCompany(trainCompany);
 		setFromStation(fromStation);
 		setToStation(toStation);
