@@ -14,21 +14,14 @@ import csc301.exercise1.util.Utils;
 
 public class TestTrainCompany {
 
-	private static TrainCompany ToStringTrain, PositivePriceTrain,
-	EmptyCountTrain, NormalCountTrain, FastTrain, GetNameTrain,
-	TestUpdateDirectRouteTrain, TestDeleteDirectRouteTrain,
-	TestAddGetDirectRoute;
+	private static TrainCompany EmptyCountTrain, GetNameTrain, FastTrain;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		// Create TrainCompany instances from data files in the resources folder.
 		EmptyCountTrain = Utils.createCompanyFromDataFile("EmptyCountTrain.txt");
-		ToStringTrain = Utils.createCompanyFromDataFile("ToStringTrain.txt");
 		GetNameTrain = Utils.createCompanyFromDataFile("GetNameTrain.txt");
 		FastTrain = Utils.createCompanyFromDataFile("FastTrain.txt");
-		TestUpdateDirectRouteTrain = Utils.createCompanyFromDataFile("TestUpdateDirectRouteTrain.txt");
-		TestDeleteDirectRouteTrain = Utils.createCompanyFromDataFile("TestDeleteDirectRouteTrain.txt");
-		TestAddGetDirectRoute = Utils.createCompanyFromDataFile("TestAddGetDirectRouteTrain.txt");
 	}
 
 

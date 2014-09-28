@@ -1,3 +1,0 @@
-TestDeleteDirectRouteTrain
-Toronto,Ottawa,10
-Ottawa,Toronto,10

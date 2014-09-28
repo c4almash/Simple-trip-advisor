@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,6 +19,7 @@ public class TestMyTripAdvisor {
 	private static TrainCompany rubyOnRails;
 	private static TrainCompany viaRail;
 	private static TrainCompany goTrain;
+	private MyTripAdvisor advisor;
 
 
 	@BeforeClass
@@ -31,6 +33,19 @@ public class TestMyTripAdvisor {
 		goTrain = Utils.createCompanyFromDataFile("GOTrain.txt");
 	}
 
+	/*
+	 * Test MyTripAdvisor construct (always)
+	 */
+
+	@Before
+	public void setUp() throws Exception {
+		advisor = new MyTripAdvisor();
+	}
+
+
+	/*
+	 * Sample test cases
+	 */
 
 	@Test(timeout=3000)
 	public void twoRouteTripWhereRoutesAreFromDifferentCompanies() {
@@ -57,39 +72,65 @@ public class TestMyTripAdvisor {
 		assertTrue(55 == advisor.getCheapestPrice(Constants.TORONTO, Constants.MONTREAL));
 	}
 
-	@Test(timeout=3000)
-	public void nonExistentTrip() {
-		MyTripAdvisor advisor = new MyTripAdvisor();
-		advisor.addTrainCompany(moonTrain);
-		
-		assertTrue(null == advisor.getCheapestTrip(Constants.TORONTO, Constants.MONTREAL));
+
+	/*
+	 * Test addTrainCompany
+	 */
+
+	// Adding a null company is not allowed
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldNotAddNullCompany() {
+		advisor.addTrainCompany(null);
 	}
+
+	@Test
+	public void shouldAddTrainCompany() {
+		advisor.addTrainCompany(moonTrain);
+	}
+
+
+	/*
+	 * Test getCheapestPrice
+	 */
 	
 	@Test(timeout=3000)
 	public void nonExistentPrice() {
-		MyTripAdvisor advisor = new MyTripAdvisor();
 		advisor.addTrainCompany(viaRail);
-		
 		assertTrue(-1 == advisor.getCheapestPrice(Constants.TORONTO, Constants.LONDON));
 	}
 
 	@Test(timeout=3000)
 	public void equalPriceForTwoRoutes() {
-		MyTripAdvisor advisor = new MyTripAdvisor();
 		advisor.addTrainCompany(viaRail);
 		assertTrue(50 == advisor.getCheapestPrice(Constants.MONTREAL, Constants.VANCOUVER));
 	}
 	
 	@Test(timeout=3000)
 	public void multipleWaysToGetToDestinationPrice() {
-		MyTripAdvisor advisor = new MyTripAdvisor();
 		advisor.addTrainCompany(viaRail);
 		assertTrue(25 == advisor.getCheapestPrice(Constants.TORONTO, Constants.WATERLOO));
 	}
-	
+
+	@Test(timeout=3000)
+	public void sameFromStationAndToStationPrice() {
+		advisor.addTrainCompany(goTrain);
+		assertTrue(0 == advisor.getCheapestPrice(Constants.TORONTO, Constants.TORONTO));
+	}
+
+
+	/*
+	 * Test getCheapestTrip
+	 */
+
+	@Test(timeout=3000)
+	public void nonExistentTrip() {
+		advisor.addTrainCompany(moonTrain);
+		
+		assertTrue(null == advisor.getCheapestTrip(Constants.TORONTO, Constants.MONTREAL));
+	}
+
 	@Test(timeout=3000)
 	public void multipleWaysToGetToDestinationTrip() {
-		MyTripAdvisor advisor = new MyTripAdvisor();
 		advisor.addTrainCompany(viaRail);
 		advisor.addTrainCompany(rubyOnRails);
 		
@@ -98,25 +139,11 @@ public class TestMyTripAdvisor {
 		assertEquals(new DirectRoute(rubyOnRails, Constants.TORONTO, Constants.VANCOUVER, 10), trip.get(0));
 		assertEquals(new DirectRoute(rubyOnRails, Constants.VANCOUVER, Constants.WATERLOO, 5), trip.get(1));
 	}
-	
-	@Test(timeout=3000)
-	public void sameFromStationAndToStationPrice() {
-		MyTripAdvisor advisor = new MyTripAdvisor();
-		advisor.addTrainCompany(goTrain);
-		assertTrue(0 == advisor.getCheapestPrice(Constants.TORONTO, Constants.TORONTO));
-	}
-	
+
 	@Test(timeout=3000)
 	public void sameFromStationAndToStationTrip() {
-		MyTripAdvisor advisor = new MyTripAdvisor();
 		advisor.addTrainCompany(goTrain);
 		assertTrue(0 == advisor.getCheapestTrip(Constants.TORONTO, Constants.TORONTO).size());
 	}
 
-	// Adding a null company is not allowed
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotAddNullCompany() {
-		MyTripAdvisor advisor = new MyTripAdvisor();
-		advisor.addTrainCompany(null);
-	}
 }
