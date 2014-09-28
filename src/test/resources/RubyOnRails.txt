@@ -2,7 +2,7 @@ Ruby on Rails
 Toronto,Vancouver,10
 Vancouver,Ottawa,5
 Vancouver,Montreal,20
-Vancouver,Quebec,5
+Vancouver,Waterloo,5
 Ottawa,Toronto,15
-Montreal,Quebec,20
-Quebec,Montreal,10
+Montreal,Waterloo,20
+Waterloo,Montreal,10

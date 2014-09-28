@@ -4,10 +4,12 @@ Toronto,Montreal,15
 Vancouver,Ottawa,25
 Ottawa,Toronto,20
 Ottawa,Montreal,5
-Ottawa,Quebec,15
+Ottawa,Waterloo,15
 Montreal,Halifax,20
+Montreal,Vancouver,50
 Halifax,Montreal,15
-Halifax,Quebec,35
-Quebec,Halifax,5
-Quebec,Vancouver,25
-Alberta,Vancouver,40
+Halifax,Waterloo,35
+Waterloo,Halifax,5
+Waterloo,Vancouver,25
+Waterloo,Ottawa,10
+London,Vancouver,40
