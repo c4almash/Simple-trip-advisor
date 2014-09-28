@@ -30,7 +30,7 @@ Our schedule main objective was to have an MVP by the 22nd of September. To stay
 
 Tasks Assignment
 ----------------
-During our in class meetings, all team members would share their strengths and weaknesses and accordingly be assigned tasks. At our meetings we would have a write-up of issues, which we then open Github tickets for. We used Github continuously throughout the project for day-to-day tasks and overall design issues.
+During our in-class meetings, all team members would share their strengths and weaknesses and accordingly be assigned tasks. At our meetings we would have a write-up of issues, which we then open Github tickets for. We used Github continuously throughout the project for day-to-day tasks and overall design issues.
 
 GitHub Issue Management System
 ------------------------------
