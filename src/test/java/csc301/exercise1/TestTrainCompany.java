@@ -1,9 +1,6 @@
 package csc301.exercise1;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import junit.framework.TestCase;
 
 import org.junit.BeforeClass;
@@ -11,11 +8,13 @@ import org.junit.Test;
 
 import csc301.exercise1.util.Constants;
 import csc301.exercise1.util.Utils;
+
 public class TestTrainCompany {
 	private static TrainCompany ToStringTrain, PositivePriceTrain,
 	EmptyCountTrain, NormalCountTrain, FastTrain, GetNameTrain,
 	TestUpdateDirectRouteTrain, TestDeleteDirectRouteTrain,
 	TestAddGetDirectRoute;
+
 	/*
 	 * Test Train Company Names
 	 */
@@ -31,7 +30,7 @@ public class TestTrainCompany {
 		TestDeleteDirectRouteTrain = Utils.createCompanyFromDataFile("TestDeleteDirectRouteTrain.txt");
 		TestAddGetDirectRoute = Utils.createCompanyFromDataFile("TestAddGetDirectRouteTrain.txt");
 	}
-	
+
 	// An example of how to verify that an exception is thrown
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldNotCreateCompanyWithNullName() {
@@ -62,6 +61,39 @@ public class TestTrainCompany {
 	public void shouldNotCreateCompanyWithSameName() {
 		new TrainCompany("E");
 		new TrainCompany("E");
+	}
+
+	@Test
+	public void testUpdateDirectRoute(){
+		assertEquals(new DirectRoute(TestUpdateDirectRouteTrain, Constants.MONTREAL, Constants.OTTAWA, 50), 
+				TestUpdateDirectRouteTrain.createOrUpdateDirectRoute(Constants.MONTREAL, Constants.OTTAWA, 50));
+	}
+
+	public void testDeleteDirectRoute(){
+		
+	}
+
+	@Test
+	public void testAddGetDirectRoute(){
+		assertEquals(new DirectRoute(TestAddGetDirectRoute, Constants.TORONTO, Constants.OTTAWA, 10), 
+				TestAddGetDirectRoute.getDirectRoute(Constants.TORONTO, Constants.OTTAWA));
+	}
+
+	public void testGetDirectRoutesFrom(){
+		
+	}
+
+	public void testGetRoutesTo(){
+		
+	}
+
+	public void testGetAllDirectRoutes(){
+		
+	}
+
+	@Test
+	public void testGetDirectRoutesCount(){
+		assertEquals(2, TestAddGetDirectRoute.getDirectRoutesCount());
 	}
 
 	@Test

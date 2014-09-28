@@ -19,7 +19,6 @@ public class TestDirectRoute {
 		cpr = new TrainCompany("Canadian Pacific Railway");
 	}
 
-
 	// A very basic example of a passing test
 	@Test
 	public void testCreateInstanceWithoutException() {
@@ -32,20 +31,22 @@ public class TestDirectRoute {
 		new DirectRoute(cpr, Constants.TORONTO, Constants.OTTAWA, 37.5);
 	}
 
-
 	/*
-	 * Test DirectRoute
+	 * Test trainCompany attribute of DirectRoute
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void trainCompanyMustNotBeNull() {
 		new DirectRoute(null, Constants.TORONTO, Constants.MONTREAL, 37.5);
 	}
-	
+
+	/*
+	 * Test price attribute of DirectRoute
+	 */	
 	@Test(expected = IllegalArgumentException.class)
 	public void priceMustBeNonNegative() {
 		new DirectRoute(viaRail, Constants.TORONTO, Constants.MONTREAL, -1);
 	}
-	
+
 	@Test
 	public void testDifferentRoutes() {
 		DirectRoute dr1 = new DirectRoute(viaRail, Constants.TORONTO, Constants.WATERLOO, 1);
