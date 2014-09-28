@@ -80,6 +80,18 @@ public class TrainCompany {
 	}
 	
 	/**
+	 * @return null if there is no route from <code>fromStation</code> to
+	 * 			<code>toStation</code> with this TrainCompany.
+	 */
+	public DirectRoute getDirectRoute(String fromStation, String toStation){
+		try {
+			return getRoute(fromStation, toStation);
+		} catch (DirectRouteNotFound e) {
+			return null;
+		}
+	}
+
+	/**
 	 * @return	The DirectRoute object that was created/updated.
 	 * @param	fromStation		The departure station of the route.
 	 * @param	toStation		The terminal station of the route.
@@ -129,7 +141,7 @@ public class TrainCompany {
 	}
 	
 	/**
-	 * @return	a collection of all routes departuring from <code>fromStation</code> offered by the company,
+	 * @return	a collection of all routes departing from <code>fromStation</code> offered by the company,
 	 * 			if there's any.
 	 * @throws	IllegalArgumentException		if the <code>fromStation</code> is null or containing
 	 * 											whitespace only.
