@@ -3,7 +3,6 @@ package csc301.exercise1;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -21,6 +20,10 @@ public class TestDirectRoute {
 	}
 
 
+	/*
+	 * Test DirectRoute construct
+	 */
+
 	// A very basic example of a passing test
 	@Test
 	public void testCreateInstanceWithoutException() {
@@ -28,25 +31,76 @@ public class TestDirectRoute {
 	}
 
 	@Test
-	public void createMultipleUniqueInstancesWithoutException() {
+	public void shouldCreateMultipleUniqueInstancesWithoutException() {
 		new DirectRoute(cnr, Constants.TORONTO, Constants.OTTAWA, 37.5);
 		new DirectRoute(cpr, Constants.TORONTO, Constants.OTTAWA, 37.5);
 	}
 
-
-	/*
-	 * Test DirectRoute
-	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void trainCompanyMustNotBeNull() {
+	public void shouldNotAllowCompanyWithNullName() {
 		new DirectRoute(null, Constants.TORONTO, Constants.MONTREAL, 37.5);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
-	public void priceMustBeNonNegative() {
+	public void shouldNotAllowStationWithNullNames() {
+		new DirectRoute(cnr, null, null, 37.5);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldNotAllowStationWithEmptyOrBlankNames() {
+		new DirectRoute(cnr, "", " ", 37.5);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldNotAllowNegativePrice() {
 		new DirectRoute(viaRail, Constants.TORONTO, Constants.MONTREAL, -1);
 	}
-	
+
+	@Test
+	public void allowStationWithNonWhitespaceNames() {
+		new DirectRoute(cnr, "A", "B ", 37.5);
+		new DirectRoute(cnr, " C", " D ", 37.5);
+	}
+
+
+	/*
+	 * Test getTrainCompany, setTrainCompany
+	 */
+
+	public void testGetTrainCompany() {
+		// TODO: implement this
+	}
+
+	public void testSetTrainCompany() {
+		// TODO: implement this
+	}
+
+
+	/*
+	 * Test getFromStation, setFromStation
+	 *      getToStation, setToStation
+	 */
+
+	// TODO: implement these
+
+
+	/*
+	 * Test getPrice, setPrice
+	 */
+
+	public void testGetPrice() {
+		// TODO: implement this
+	}
+
+	public void testSetPrice() {
+		// TODO: implement this
+	}
+
+
+	/*
+	 * Test equals
+	 */
+
 	@Test
 	public void testDifferentRoutes() {
 		DirectRoute dr1 = new DirectRoute(viaRail, Constants.TORONTO, Constants.WATERLOO, 1);
@@ -67,58 +121,11 @@ public class TestDirectRoute {
 
 		assertTrue(dr1.equals(dr2));
 	}
-
-
-	/*
-	 * Test Station names
-	 * Assume station names stored in this class
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotAllowStationWithNullNames() {
-		new DirectRoute(cnr, null, null, 37.5);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotAllowStationWithEmptyOrBlankNames() {
-		new DirectRoute(cnr, "", " ", 37.5);
-	}
-
+	
 	@Test
-	public void allowStationWithNonWhitespaceNames() {
-		new DirectRoute(cnr, "A", "B ", 37.5);
-		new DirectRoute(cnr, " C", " D ", 37.5);
+	public void routeNamesShouldIgnoreTrailingWhitespace() {
+		DirectRoute cmp1 = new DirectRoute(cnr, "A", "B ", 37.5);
+		DirectRoute cmp2 = new DirectRoute(cnr, " A		\n", " B ", 37.5);
+		assertTrue(cmp1.equals(cmp2));
 	}
-
-	// Not sure if creating duplicate route should throw error or gracefully fall back and
-	// return the existing route..
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotAllowStationWithSameNames() {
-		new DirectRoute(cnr, Constants.TORONTO, Constants.MONTREAL, 37.5);
-		new DirectRoute(cnr, Constants.TORONTO, Constants.MONTREAL, 37.5);
-	}
-
-
-	/*
-	 * Test that "a company cannot offer different prices for the same route".
-	 * Should we just update the price for that route instead?
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotCreateExistingRouteWithDifferentPrices() {
-		new DirectRoute(cpr, Constants.TORONTO, Constants.MONTREAL, 37.5);
-		new DirectRoute(cpr, Constants.TORONTO, Constants.MONTREAL, 36);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotAllowSameValueForFromStationAndToStation() {
-		new DirectRoute(cpr, Constants.TORONTO, Constants.TORONTO, 50);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldNotAllowSameValueForFromStationAndToStationWithStringObjects() {
-		String toronto = new String("Toronto");
-		String toronto2 = new String("Toronto");
-
-		new DirectRoute(cpr, toronto, toronto2, 50);
-	}
-
 }

@@ -1,0 +1,7 @@
+GO Train
+Toronto,Vancouver,10
+Toronto,Ottawa,20
+Vancouver,Ottawa,15
+Vancouver,Montreal,20
+Ottawa,Vancouver,10
+Montreal,Ottawa,5
