@@ -71,7 +71,7 @@ public class TrainCompany {
 	 * 										with the same name.
 	 */
 	public void setName(String name) {
-		checkError(name);
+		checkStrings(name);
 		if (trainCompanyNameList.contains(name.trim())) {
 			throw new IllegalArgumentException("Two instances of TrainCompany cannot have the same name");
 		}
@@ -79,6 +79,18 @@ public class TrainCompany {
 		trainCompanyNameList.add(this.name);
 	}
 	
+	/**
+	 * @return null if there is no route from <code>fromStation</code> to
+	 * 			<code>toStation</code> with this TrainCompany.
+	 */
+	public DirectRoute getDirectRoute(String fromStation, String toStation){
+		try {
+			return getRoute(fromStation, toStation);
+		} catch (DirectRouteNotFound e) {
+			return null;
+		}
+	}
+
 	/**
 	 * @return	The DirectRoute object that was created/updated.
 	 * @param	fromStation		The departure station of the route.
@@ -91,6 +103,9 @@ public class TrainCompany {
 	 * 										the same.
 	 */
 	public DirectRoute createOrUpdateDirectRoute(String fromStation, String toStation, double price){
+		checkStrings(fromStation, toStation);
+		checkPrice(price);
+		
 		DirectRoute newRoute = new DirectRoute(this, fromStation, toStation, price);
 		try {
 			this.updateRoutePrice(newRoute, price);
@@ -110,32 +125,21 @@ public class TrainCompany {
 	 * 										or containing whitespace only.
 	 */
 	public void deleteDirectRoute(String fromStation, String toStation){
-		checkError(fromStation, toStation);
+		checkStrings(fromStation, toStation);
 		try {
 			this.deleteRoute(this.getRoute(fromStation, toStation));
 		} catch (DirectRouteNotFound e) {
 		}
 	}
-	/**
-	 * Add direct route to the company's <code>directRouteCollection</code>.
-	 * 
-	 * @param	fromStation					The departure station of the route.
-	 * @param	toStation					The terminal station of the route.
-	 * @param	price						The price of the route.
-	 * @throws	IllegalArgumentException	if there exists a same route in <code>directRouteCollection</code>
-	 */
-	public void addDirectRoute(String fromStation, String toStation, double price) {
-		directRouteCollection.add(createOrUpdateDirectRoute(fromStation, toStation, price));
-	}
 	
 	/**
-	 * @return	a collection of all routes departuring from <code>fromStation</code> offered by the company,
+	 * @return	a collection of all routes departing from <code>fromStation</code> offered by the company,
 	 * 			if there's any.
 	 * @throws	IllegalArgumentException		if the <code>fromStation</code> is null or containing
 	 * 											whitespace only.
 	 */
 	public Collection<DirectRoute> getDirectRoutesFrom(String fromStation){
-		checkError(fromStation);
+		checkStrings(fromStation);
 
 		DirectRoute[] directRoutes = (DirectRoute[]) directRouteCollection.toArray(new DirectRoute[directRouteCollection.size()]);
 		Collection<DirectRoute> routesFrom = new ArrayList<DirectRoute>();
@@ -157,7 +161,7 @@ public class TrainCompany {
 	 * 											whitespace only.
 	 */
 	public Collection<DirectRoute> getRoutesTo(String toStation){
-		checkError(toStation);
+		checkStrings(toStation);
 
 		DirectRoute[] directRoutes = (DirectRoute[]) directRouteCollection.toArray(new DirectRoute[directRouteCollection.size()]);
 		Collection<DirectRoute> routesTo = new ArrayList<DirectRoute>();
@@ -221,7 +225,7 @@ public class TrainCompany {
 		return uniqueStations.size();
 	}
 
-	private static void checkError(String... name) {
+	private static void checkStrings(String... name) {
 		if (name == null) {
 			throw new IllegalArgumentException("Names must not be null");
 		}
@@ -233,6 +237,12 @@ public class TrainCompany {
 			if (s.isEmpty()) {
 				throw new IllegalArgumentException("Names must contain at least one non-whitespace character");
 			}
+		}
+	}
+	
+	private static void checkPrice(double price) {
+		if (price < (double) 0) {
+			throw new IllegalArgumentException("Price cannot be nonnegative");
 		}
 	}
 

@@ -12,32 +12,6 @@ import csc301.exercise1.util.Utils;
 
 public class TestMyTripAdvisor {
 
-	
-	/*
-	 * You can use the starter code as an example of how to write tests
-	 * a bit more efficiently, and cleanly. 
-	 * You don't have to use our technique, we are just suggesting something that
-	 * you might find it useful.
-	 * 
-	 * Here's a description of what we do:
-	 * 1. We store a train-company's data in a text file.
-	 * 2. Before each test, we load all of the data from the files to local variables.
-	 *    Note: This is inefficient, and would be an issue in a project that has many 
-	 *    tests and data files. For this exercise, we chose to not worry about this issue.
-	 * 
-	 * Technical notes:
-	 * - All data files are stored in src/test/resources.
-	 *   This is important! If you data files are not stored with the project, we will
-	 *   not be able to use them, when running your tests.
-	 * - We've defined some utility classes in src/test/java/csc301/exercise1/util.
-	 *   Feel free to add/modify code in these classes.
-	 * - You might find it useful to come up with a few more utility functions that
-	 *   will help you write cleaner tests.
-	 *   
-	 * TODO: Delete this comment before you submit the assignment.
-	 */
-	
-	
 	private static TrainCompany fastTrain;
 	private static TrainCompany swiftRail;
 
